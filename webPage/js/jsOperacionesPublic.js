@@ -82,7 +82,7 @@ function cambiarContrasena() {
                         try {
                             var ret = eval('(' + data + ')');
                             if (ret.hasOwnProperty("success")) {
-                                location.href = "/nomina/php_cerrar";
+                                location.href = "/talentohumano/php_cerrar";
                             } else if (ret.hasOwnProperty("mensaje")) {
                                 alertify.error(ret.mensaje);
                             }

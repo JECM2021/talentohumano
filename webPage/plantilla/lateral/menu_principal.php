@@ -8,7 +8,7 @@ $idPaginas = isset($_GET["page"]) ? $_GET["page"] : 'sin definir';
 $class = isset($_GET["page"]) ? $_GET["page"] : 'treeview active';
 ?>
 <script>
-    var controlerHistoria = "/../../clinicasv/Controlador/HistoriaClinica/CtlHistoriaClinica";
+    var controlerHistoria = "/../../talentohumano/Controlador/HistoriaClinica/CtlHistoriaClinica";
 </script>
 
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="padding: 0px !important;">

@@ -11,7 +11,7 @@ $empresa = $_SESSION['empEmpresa'];
         var CONTROLLERPUBLIC = "./Controlador/CtlOperacionesPublics.php";
     </script>
     <link href="webpage/plantilla/css/estiloPrincipal.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/clinicasv/webPage/plantilla/assets/bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/talentohumano/webPage/plantilla/assets/bower_components/font-awesome/css/font-awesome.min.css">
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
@@ -30,7 +30,7 @@ $empresa = $_SESSION['empEmpresa'];
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
 
                     <div class="dropdown-divider"></div>
-                    <a href="/clinicasv/php_cerrar"><i class="fa fa-sign-out" aria-hidden="true"></i> Cerrar sesión</a>
+                    <a href="/talentohumano/php_cerrar"><i class="fa fa-sign-out" aria-hidden="true"></i> Cerrar sesión</a>
                 </div>
             </li>
         </ul>

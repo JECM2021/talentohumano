@@ -58,10 +58,10 @@ function loguerarUsuario()
             $_SESSION['operacionesUsuario'] = $operacionesUsuario;
             $_SESSION['validate'] = true;
             $_SESSION['invalido'] = "";
-            header("Location: /nomina/Principal");
+            header("Location: /talentohumano/Principal");
         } else {
             $_SESSION['invalido'] = "Usuario o contraseña incorrecta. Por favor verifique.";
-            header("Location: /nomina/login");
+            header("Location: /talentohumano/login");
         }
     } catch (Exception $exc) {
         echo $exc->getTraceAsString();
@@ -126,7 +126,7 @@ function logueraEmpresas()
         //$tercero = $mdlPacientes->optenertercero($usuario);
         //$_SESSION['tercero'] = $tercero[0]['TER_ID'];
         //die(var_dump($_SESSION));
-        header("Location: /nomina/index");
+        header("Location: /talentohumano/index");
     } catch (Exception $exc) {
         echo $exc->getTraceAsString();
     }
