@@ -1,0 +1,260 @@
+<root>
+    <VISUALIZAR_EMPLEADOS>
+        <sql>
+            SELECT
+            EMPL.EMPL_ID AS ID,
+            TPD.TIP_DESCRIPCION AS TIPODOCUMENTO,
+            EMPL.NUM_DOCUMENTO AS NUMDOCUMENTO,
+            CONCAT( EMPL_PRIMER_NOMBRE, " ", EMPLE_SEGUNDO_NOMBRE, " ", EMPL_PRIMER_APELLIDO, " ", EMPL_SEGUNDO_APELLIDO ) AS NOMBREYAPELLIDO,
+            CASE
+            WHEN EMPL.EMPL_ESTADO = "A" THEN
+            "ACTIVO" 
+            WHEN EMPL.EMPL_ESTADO = "I" THEN
+            "INACTIVO" 
+            END AS ESTADOEMPLEADO,
+            EMPL.TIP_ID AS TIPODOCUMENTO_ID,
+            EMPL.EMPL_ESTADO AS ESTADO_ID,
+            CTR.CTRA_NUMERO AS NUM_CONTRATO,
+            CTR.TPCT_ID AS TIPO_CONTRATO,
+            CTR.CRG_ID AS CARGO,
+            DATE(CTR.CTRA_FECHA_INICIO) AS FECHA_INICIO,
+            DATE(CTR.CTRA_FECHA_FINAL) AS FECHA_FINAL,
+            CTR.MTVR_ID AS MOTIVO_RETIRO,
+            CTR.SALARIO_TOTAL AS SALARIO_ACTUAL,
+            CTR.SALARIO_POR_DIA AS SALARIO_DIA,
+            CTR.FDP_IP AS FORMA_PAGO,
+            CTR.TPCTZ_ID AS TIPO_COTIZANTE,
+            CTR.ARL_ID AS ARL,
+            CTR.PORC_ARL AS POCENTAJE_ARL,
+            CTR.PARAF_ID AS PARAFISCAL_ID,
+            CTR.CESAN_ID AS CESANTIAS_ID,
+            CTR.CTDC_ID AS CENTRO_COSTO,
+            DATE(CTR.CTRA_FECHA_INICIO_VACACIONES)AS FECHA_INICIO_VACACIONES,
+            DATE(CTR.CTRA_FECHA_FIN_VACACIONES) AS FECHA_FIN_VACACIONES,
+            CTR.CIU_ID AS CIUDAD,
+            CTR.FONDO_SALUD AS FONDO_SALUD,
+            CTR.PORC_SALUD AS POCENTAJE_SALUD,
+            DATE(CTR.FECHA_INICIO_FONDO_SALUD) AS FECHA_INICIO_SALUD,
+            CTR.FONDO_PENSION_ID AS FONDO_PENSION,
+            CTR.PORC_PENSION AS PORCENTAJE_PENSION,
+            DATE(CTR.FECHA_INICIO_PENSION) AS FECHA_INICIO_PENSION,
+            CTR.BANCOS_ID AS BANCO_ID,
+            CTR.TIPO_CUENTA_ID AS TIPO_CUENTA_BANCARIA,
+            CTR.CTRA_NUM_CUENTA AS NUM_CUENTA,
+            CTR.CTRA_ID AS CONTRATO_ID
+            FROM
+            EMPLEADOS EMPL
+            INNER JOIN TIPO_DOCUMENTO TPD ON TPD.TIP_ID = EMPL.TIP_ID
+            LEFT JOIN CONTRATO CTR ON CTR.EMPL_ID = EMPL.EMPL_ID
+        </sql>
+    </VISUALIZAR_EMPLEADOS>
+    <LISTAR_COMBO_TIPO_DOCUMENTO>
+        <sql>
+          SELECT TIP_ID AS ID, TIP_DESCRIPCION AS DESCRIPCION  FROM TIPO_DOCUMENTO;
+        </sql>
+    </LISTAR_COMBO_TIPO_DOCUMENTO>
+    <LISTAR_COMBO_CARGOS>
+        <sql>
+            SELECT CRG_ID AS ID, CRG_DESCRIPCION AS DESCRIPCION FROM CARGOS;
+        </sql>
+    </LISTAR_COMBO_CARGOS>
+    <LISTAR_COMBO_TIPO_CONTRATO>
+        <sql>
+             SELECT TPCT_ID AS ID, UPPER(TPCT_DESCRIPCION) AS DESCRIPCION FROM TIPO_CONTRATO;
+        </sql>
+    </LISTAR_COMBO_TIPO_CONTRATO>
+    <LISTAR_COMBO_MOTIVO_RETIRO>
+        <sql>
+             SELECT MTVR_ID AS ID, UPPER(MTVR_DESCRIPCION)  AS DESCRIPCION FROM MOTIVO_RETIRO;
+        </sql>
+    </LISTAR_COMBO_MOTIVO_RETIRO>
+    <LISTAR_COMBO_FORMA_PAGO>
+        <sql>
+            SELECT FDP_ID AS ID, UPPER(FDP_DESCRIPCION) AS DESCRIPCION FROM FORMA_DE_PAGO;
+        </sql>
+    </LISTAR_COMBO_FORMA_PAGO>
+    <LISTAR_COMBO_TIPO_COTIZANTE>
+        <sql>
+             SELECT TPCZT_ID AS ID,UPPER(TPCZT_DESCRIPCION) AS DESCRIPCION FROM TIPO_COTIZANTE;
+        </sql>
+    </LISTAR_COMBO_TIPO_COTIZANTE>
+    <LISTAR_COMBO_ARL>
+        <sql>
+            SELECT
+            ARLL.ARL_ID AS ID,
+            ARLL.ARL_DESCRIPCION AS DESCRIPCION,
+            ARLD.ARLD_RIESGO_CERO AS RIESGO	
+            FROM
+            ARL ARLL
+            INNER JOIN ARL_DETALLE ARLD ON ARLD.ARL_ID = ARLL.ARL_ID
+        </sql>
+    </LISTAR_COMBO_ARL>
+    <LISTAR_COMBO_CAJA_COMPENSACION>
+        <sql>
+            SELECT PARAF_ID AS ID, PARAF_NOMBRE AS DESCRIPCION FROM PARAFISCALES;
+        </sql>
+    </LISTAR_COMBO_CAJA_COMPENSACION>
+    <LISTAR_COMBO_CENSATIAS>
+        <sql>
+            SELECT FOND_ID AS ID, FOND_DESCRIPCION AS DESCRIPCION FROM FONDOS WHERE TFOE_ID = 1;
+        </sql>
+    </LISTAR_COMBO_CENSATIAS>
+    <LISTAR_COMBO_CIUDAD_LABORAL>
+        <sql>
+            SELECT CIU_ID AS ID, CIU_DESCRIPCION AS DESCRIPCION FROM CIUDAD;
+        </sql>
+    </LISTAR_COMBO_CIUDAD_LABORAL>
+    <LISTAR_COMBO_SALUD>
+        <sql>
+            SELECT
+            FD.FOND_ID AS ID,
+            FD.FOND_DESCRIPCION AS DESCRIPCION,
+            FND.por_salud AS PORCENTAJE
+            FROM
+            FONDOS FD
+            INNER JOIN fondos_detalle FND ON FND.fond_id = 	FD.fond_id
+            WHERE
+            TFOE_ID = 2;
+        </sql>
+    </LISTAR_COMBO_SALUD>
+    <LISTAR_COMBO_PENSION>
+        <sql>
+            SELECT
+            FD.FOND_ID AS ID,
+            FD.FOND_DESCRIPCION AS DESCRIPCION,
+            FND.POR_PENSION AS PORCENTAJE
+            FROM
+            FONDOS FD
+            INNER JOIN FONDOS_DETALLE FND ON FND.FOND_ID = 	FD.FOND_ID
+            WHERE
+            TFOE_ID = 1;   
+        </sql>
+    </LISTAR_COMBO_PENSION>
+    <LISTAR_BANCOS>
+        <sql>
+            SELECT
+            BANC_ID AS ID,
+            BANC_DESCRIPCION AS DESCRIPCION 
+            FROM
+            BANCOS 
+            WHERE
+            BANC_ESTADO = 'A';
+        </sql>
+    </LISTAR_BANCOS>
+    <LISTAR_TIPO_CUENTA>
+        <sql>
+            SELECT
+            TPCB_ID AS ID,
+            UPPER(TPCB_DESCRIPCION) AS DESCRIPCION
+            FROM
+            TIPO_CUENTA_BANCARIA 
+            WHERE
+            TPCB_ESTADO = 'A'
+        </sql>
+    </LISTAR_TIPO_CUENTA>
+    <LISTAR_CENTRO_COSTO>
+        <sql>
+            SELECT
+            CDC_ID AS ID,
+            CDC_DESCRIPCION AS DESCRIPCION	
+            FROM
+            CENTRO_DE_COSTO
+            WHERE CDC_ESTADO='A';
+        </sql>
+    </LISTAR_CENTRO_COSTO>
+    <CONSULTAR_CONTRATO_ASIGNADO>
+        <sql>
+            SELECT
+            CTRA_NUMERO AS NUMERO 
+            FROM
+            CONTRATO
+            WHERE
+            EMPL_ID = ?;
+        </sql>
+    </CONSULTAR_CONTRATO_ASIGNADO>
+    <ASIGNAR_CONTRATO>
+        <sql>
+            INSERT INTO CONTRATO (
+            EMPL_ID,
+            CTRA_NUMERO,
+            TPCT_ID,
+            CRG_ID,
+            CTRA_FECHA_INICIO,
+            CTRA_FECHA_FINAL,
+            MTVR_ID,
+            SALARIO_TOTAL,
+            SALARIO_POR_DIA,
+            FDP_IP,
+            TPCTZ_ID,
+            ARL_ID,
+            PORC_ARL,
+            PARAF_ID,
+            CESAN_ID,
+            CTDC_ID,
+            CTRA_FECHA_INICIO_VACACIONES,
+            CTRA_FECHA_FIN_VACACIONES,
+            CIU_ID,
+            FONDO_SALUD,
+            PORC_SALUD,
+            FECHA_INICIO_FONDO_SALUD,
+            FONDO_PENSION_ID,
+            PORC_PENSION,
+            FECHA_INICIO_PENSION,
+            BANCOS_ID,
+            TIPO_CUENTA_ID,
+            CTRA_NUM_CUENTA
+            )
+            VALUES
+            (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+        </sql>
+    </ASIGNAR_CONTRATO>
+    <ASIGNAR_ANEXO>
+        <sql>
+            INSERT INTO ANEXOS ( ANX_NOMBRE, ANX_DESCRIPCION, ANX_TAMANO, ANX_RUTA, TANX_ID, CTRA_ID, EMPL_ID )VALUES(?,?,?,?,?,?,?);
+        </sql>
+    </ASIGNAR_ANEXO>
+    <ACTUALIZAR_CONTRATO>
+        <sql>
+            UPDATE CONTRATO SET 
+            CTRA_NUMERO =?,
+            TPCT_ID = ?,
+            CRG_ID = ?,
+            CTRA_FECHA_INICIO = ?,
+            CTRA_FECHA_FINAL = ?,
+            MTVR_ID = ?,
+            SALARIO_TOTAL = ?,
+            SALARIO_POR_DIA = ?,
+            FDP_IP = ?,
+            TPCTZ_ID = ?,
+            ARL_ID = ?,
+            PORC_ARL = ?,
+            PARAF_ID = ?,
+            CESAN_ID = ?,
+            CTDC_ID = ?,
+            CTRA_FECHA_INICIO_VACACIONES = ?,
+            CTRA_FECHA_FIN_VACACIONES = ?,
+            CIU_ID = ?,
+            FONDO_SALUD = ?,
+            PORC_SALUD = ?,
+            FECHA_INICIO_FONDO_SALUD = ?,
+            FONDO_PENSION_ID = ?,
+            PORC_PENSION = ?,
+            FECHA_INICIO_PENSION = ?,
+            BANCOS_ID = ?,
+            TIPO_CUENTA_ID = ?,
+            CTRA_NUM_CUENTA = ?
+            WHERE 
+            EMPL_ID = ?
+        </sql>
+    </ACTUALIZAR_CONTRATO>
+    <LISTAR_TIPO_ANEXO>
+        <sql>
+        SELECT
+        TANX_ID AS ID,
+        TANX_NOMBRE AS DESCRIPCION 	
+        FROM
+        TIPO_ANEXO
+        WHERE TANX_ESTADO = 'A'
+        </sql>
+    </LISTAR_TIPO_ANEXO>
+</root>

@@ -1,0 +1,89 @@
+  body {
+      background: rgb(82, 86, 89) !important;
+  }
+  body.A4 .sheet {
+      height: auto !important;
+  }
+  .btn-circulo {
+      padding: 0px;
+  }
+
+  .btn-circulo.disabled i {
+      background-color: #ada1a1;
+      border-color: #ada1a1;
+  }
+
+  .btn-circulo i {
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      border-radius: 50%;
+      background-color: transparent;
+      border-color: transparent;
+      font-size: 18px;
+      color: #fff;
+  }
+
+  .btn-circulo i.fa-nuvola-email {
+      font-size: 11px;
+  }
+
+  .btn-circulo i.fa-print:before {
+      margin-left: 6.5px;
+  }
+
+  .btn-circulo i.fa-download:before {
+      margin-left: 6.5px;
+  }
+
+  .btn-circulo.hover i,
+  .btn-circulo:hover i,
+  .btn-circulo.NuvolaFileUploadHasAttach i {
+      background-color: #6c7474;
+      border-color: #6c7474;
+  }
+
+  .btn-circulo:active {
+      box-shadow: none;
+  }
+  .conten {
+      color: rgb(241, 241, 241);
+      height: 48px;
+      padding: 0 16px;
+      width: 100%;
+      background-color: rgb(50, 54, 57);
+      position: fixed;
+      top: 0px;
+  }
+  .sheet {
+    position: initial !important;
+}
+.row-grey { box-shadow: inset 0 0 0 1000px #f9f9f9; } 
+.table-prefactura thead{
+    border-bottom: 1px solid;
+    border-top: 1px solid;
+}
+.table-prefactura thead th{
+    text-align: center;
+    border: 1px solid;
+}
+#tblContenido tbody > tr > td {
+    border-bottom: 1px solid #ccc;
+} 
+.Opac{
+    opacity: 0;
+}
+.loader {
+    margin: 100px auto;
+    font-size: 25px;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    position: relative;
+    text-indent: -9999em;
+    -webkit-animation: load5 1.1s infinite ease;
+    animation: load5 1.1s infinite ease;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+}

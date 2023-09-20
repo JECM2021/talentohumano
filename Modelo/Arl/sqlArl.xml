@@ -1,0 +1,125 @@
+<root>
+    <LISTAR_TIPO_FONDOS>
+        <sql>
+            SELECT
+            TPF_ID AS ID,
+            TPF_DESCRIPCION AS DESCRIPCION 
+            FROM
+            TIPO_DE_FONDO 
+            WHERE
+            TPF_ESTADO = 'A'
+        </sql>
+    </LISTAR_TIPO_FONDOS>
+    <LISTAR_TIPO_DOCUMENTO>
+        <sql>
+            SELECT
+            TIP_ID AS ID,
+            TIP_DESCRIPCION AS DESCRIPCION	
+            FROM
+            TIPO_DOCUMENTO
+        </sql>
+    </LISTAR_TIPO_DOCUMENTO>
+    <CONSULTAR_CUENTA_CONTABLE>
+        <sql>
+            SELECT
+            CT.CODIGO AS CUENTA,
+            CT.DENOMINACION AS NOMBRE,
+            CT.ID AS ID_CUENTA
+            FROM
+            CUENTA CT
+            WHERE CT.CODIGO REGEXP ? OR CT.DENOMINACION REGEXP ?
+        </sql>
+    </CONSULTAR_CUENTA_CONTABLE>
+    <CONSULTAR_CODIGO_ARL>
+        <sql>
+            SELECT
+            ARL_DESCRIPCION AS DESCRIPCION,
+            ARL_CODIGO AS CODIGO
+            FROM
+            ARL
+            WHERE ARL_DESCRIPCION = ? OR ARL_CODIGO = ?
+        </sql>
+    </CONSULTAR_CODIGO_ARL>
+    <REGISTRAR_ARL>
+        <sql>
+            INSERT INTO ARL (ARL_CODIGO,ARL_DESCRIPCION,TIP_ID,ARL_DOCUMENTO,TPF_ID,ARL_CODADMIN,ARL_ESTADO)VALUES(?,?,?,?,?,?,?)
+        </sql>
+    </REGISTRAR_ARL>
+    <REGISTRAR_ARL_DETALLE>
+        <sql>
+            INSERT INTO ARL_DETALLE(ARL_ID,ARLD_RIESGO_CERO,ARLD_RIESGO_UNO,ARLD_RIESGO_DOS,ARLD_RIESGO_TRES,ARLD_RIESGO_CUATRO,ARLD_RIESGO_CINCO,ARLD_RIESGO_SEIS,ARLD_RIESGO_SIETE)VALUES(?,?,?,?,?,?,?,?,?)
+        </sql>
+    </REGISTRAR_ARL_DETALLE>
+    <LISTAR_FONDO_ARL>
+        <sql>
+            SELECT
+            ARL.ARL_ID AS ARL_ID,
+            ARL.ARL_CODIGO AS CODIGO,
+            ARL.ARL_DESCRIPCION AS RAZON_SOCIAL,
+            TIP.TIP_DESCRIPCION AS TIPO_DOCUMENTO,
+            ARL.TIP_ID AS TIPO_DOCUMENTO_ID,
+            ARL.ARL_DOCUMENTO AS NUMERO_DOCUMENTO,
+            TPF.TPF_DESCRIPCION AS TIPO_DE_FONDO,
+            TPF.TPF_ID AS TIPO_DE_FONDO_ID,
+            ARL.ARL_CODADMIN AS COD_ADMINISTRADORA,
+            CASE
+            WHEN ARL.ARL_ESTADO = "A" THEN
+            "ACTIVO" 
+            WHEN ARL.ARL_ESTADO = "I" THEN
+            "INACTIVO" 
+            END AS ESTADO_ARL,
+            ARL.ARL_ESTADO AS ESTADO_ARL_ID,
+            ARLD.ARLD_RIESGO_CERO AS RIESGO_CERO,
+            ARLD.ARLD_RIESGO_UNO AS RIESGO_UNO,
+            ARLD.ARLD_RIESGO_DOS AS RIESGO_DOS,
+            ARLD.ARLD_RIESGO_TRES AS RIESGO_TRES,
+            ARLD.ARLD_RIESGO_CUATRO AS RIESGO_CUATRO,
+            ARLD.ARLD_RIESGO_CINCO AS RIESGO_CINCO,
+            ARLD.ARLD_RIESGO_SEIS AS RIESGO_SEIS,
+            ARLD.ARLD_RIESGO_SIETE AS RIESGO_SIETE
+            FROM
+            ARL ARL
+            INNER JOIN ARL_DETALLE ARLD ON ARLD.ARL_ID = ARL.ARL_ID
+            INNER JOIN TIPO_DOCUMENTO TIP ON TIP.TIP_ID = ARL.TIP_ID
+            INNER JOIN TIPO_DE_FONDO TPF ON TPF.TPF_ID = ARL.TPF_ID
+        </sql>
+    </LISTAR_FONDO_ARL>
+    <ACTUALIZAR_ARL>
+        <sql>
+            UPDATE ARL 
+            SET ARL_CODIGO = ?,
+            ARL_DESCRIPCION = ?,
+            TIP_ID = ?,
+            ARL_DOCUMENTO = ?,
+            ARL_CODADMIN = ?,
+            TPF_ID = ?,
+            ARL_ESTADO = ?
+            WHERE
+            ARL_ID = ?
+        </sql>
+    </ACTUALIZAR_ARL>
+    <ACTUALIZAR_ARL_DETALLE>
+        <sql>
+            UPDATE ARL_DETALLE 
+            SET ARLD_RIESGO_CERO = ?,
+            ARLD_RIESGO_UNO = ?,
+            ARLD_RIESGO_DOS = ?,
+            ARLD_RIESGO_TRES = ?,
+            ARLD_RIESGO_CUATRO = ?,
+            ARLD_RIESGO_CINCO = ?,
+            ARLD_RIESGO_SEIS = ?,
+            ARLD_RIESGO_SIETE = ?
+            WHERE ARL_ID = ?
+        </sql>
+    </ACTUALIZAR_ARL_DETALLE>
+    <ELIMINAR_ARL_DETALLE>
+        <sql>
+            DELETE FROM ARL_DETALLE WHERE ARL_ID = ?;
+        </sql>
+    </ELIMINAR_ARL_DETALLE>
+    <ELIMINAR_ARL>
+        <sql>
+            DELETE FROM ARL WHERE ARL_ID = ?;
+        </sql>
+    </ELIMINAR_ARL>
+</root>

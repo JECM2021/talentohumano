@@ -1,0 +1,249 @@
+<root>
+    <LISTAR_TIPO_FONDOS>
+        <sql>
+            SELECT
+            TFOE_ID AS ID,
+            TFOE_DESCRIPCION AS DESCRIPCION 
+            FROM
+            TIPO_FONDO 
+            WHERE
+            TFOE_ESTADO = 'A'
+        </sql>
+    </LISTAR_TIPO_FONDOS>
+    <LISTAR_FONDOS>
+        <sql>
+            SELECT
+            TPF_ID AS ID,
+            TPF_DESCRIPCION AS DESCRIPCION
+            FROM
+            TIPO_DE_FONDO
+        </sql>
+    </LISTAR_FONDOS>
+    <LISTAR_TIPO_DOCUMENTO>
+        <sql>
+            SELECT
+            TIP_ID AS ID,
+            TIP_DESCRIPCION AS DESCRIPCION	
+            FROM
+            TIPO_DOCUMENTO
+        </sql>
+    </LISTAR_TIPO_DOCUMENTO>
+    <CONSULTAR_CODIGO_FONDO>
+        <sql> 
+            SELECT
+            FOND_DESCRIPCION AS DESCRIPCION, FOND_CODIGO AS CODIGO
+            FROM
+            FONDOS
+            WHERE (FOND_DESCRIPCION = ? OR FOND_CODIGO = ?) AND TFOE_ID = '1';
+        </sql>
+    </CONSULTAR_CODIGO_FONDO>
+
+    <CONSULTAR_CODIGO_FONDO_EPS>
+        <sql>
+            SELECT
+            FOND_DESCRIPCION AS DESCRIPCION,
+            FOND_CODIGO AS CODIGO 
+            FROM
+            FONDOS 
+            WHERE
+            (FOND_DESCRIPCION = ?
+            OR FOND_CODIGO = ?)
+            AND TFOE_ID = '2';
+        </sql>
+     
+    </CONSULTAR_CODIGO_FONDO_EPS>
+
+    <REGISTRAR_FONDOS_EPS>
+        <sql>
+        INSERT INTO FONDOS ( TFOE_ID, FOND_COD_ADMIN, FOND_DESCRIPCION, TIP_ID, FOND_DOCUMENTO, FOND_CODIGO, FOND_ESTADO, TPF_ID ) VALUES (?,?,?,?,?,?,?,?);
+        </sql>
+    </REGISTRAR_FONDOS_EPS>
+
+    <REGISTRAR_FONDOS_DETALLE_EPS>
+        <sql>
+            INSERT INTO FONDOS_DETALLE (FOND_ID, POR_SALUD) VALUES (?,?);
+        </sql>
+    </REGISTRAR_FONDOS_DETALLE_EPS>
+
+    <REGISTRAR_FONDOS>
+        <sql>   
+            INSERT INTO FONDOS ( TFOE_ID, FOND_COD_ADMIN, FOND_DESCRIPCION, TIP_ID, FOND_DOCUMENTO, FOND_CODIGO, FOND_ESTADO, TPF_ID ) VALUES (?,?,?,?,?,?,?,?);
+        </sql>  
+    </REGISTRAR_FONDOS>
+    <REGISTRAR_FONDOS_DETALLE>
+        <sql> 
+             INSERT INTO FONDOS_DETALLE (FOND_ID, POR_PENSION, POR_FSP, POR_EDU) VALUES (?,?,?,?);
+        </sql>
+    </REGISTRAR_FONDOS_DETALLE>
+    <LISTAR_FONDO_PENSION>
+        <sql>
+           SELECT
+            FD.FOND_ID AS FONDO_ID,
+            FD.FOND_CODIGO AS CODIGO,
+            FD.FOND_DESCRIPCION AS RAZON_SOCIAL,
+            TD.TIP_DESCRIPCION AS TIPO_DOCUMENTO,
+            TD.TIP_ID AS TIPO_DOCUMENTO_ID,
+            FD.FOND_DOCUMENTO AS NUMERO_DOCUMENTO,
+            TPF.TPF_DESCRIPCION AS TIPO_DE_FONDO,
+            TPF.TPF_ID AS TIPO_DE_DONDO_ID,
+            FD.FOND_COD_ADMIN AS COD_ADMISINISTRADORA,
+            CASE
+            WHEN FD.FOND_ESTADO = "A" THEN
+            "ACTIVO" 
+            WHEN FD.FOND_ESTADO = "I" THEN
+            "INACTIVO" 
+            END AS ESTADO_FONDO,
+            FD.FOND_ESTADO AS ESTADO,
+            FDD.CTA_AUXCONTABLE_PENSION AS AUX_CONT_PENSION_ID,
+            /*CT.CODIGO AS AUX_CONT_PENSION,*/
+            FDD.CTA_AUXFISCAL_PENSION AS AUX_FISCAL_PENSION_ID,
+           /* CTD.CODIGO AS AUX_FISCAL_PENSION,*/
+            FDD.CTA_AUXNORMAS_PENSION AS AUX_NORMAS_PENSION_ID,
+           /* CTT.CODIGO AS AUX_NORMAS_PENSION,*/
+            FDD.CTA_AUXCONTABLE_FSP AS AUX_CONT_FSP_ID,
+            /*CTC.CODIGO AS AUX_CONT_FSP,*/
+            FDD.CTA_AUXFISCAL_FSP AS AUX_FISCAL_FSP_ID,
+           /* CTQ.CODIGO AS AUX_FISCAL_FSP,*/
+            FDD.CTA_AUXNORMAS_FSP AS AUX_NORMAS_FSP_ID,
+            /*CTS.CODIGO AS AUX_NORMAS_FSP,*/
+            FDD.CTA_AUXCONTABLE_EDU AS AUX_CONT_EDU_ID,
+            /*CTO.CODIGO AS AUX_CONT_EDU,*/
+            FDD.CTA_AUXFISCAL_EDU AS AUX_FISCAL_EDU_ID,
+           /* CTN.CODIGO AS AUX_FISCAL_EDU,*/
+            FDD.CTA_AUXNORMAS_EDU AS AUX_NORMAS_EDU_ID,
+            /*CTV.CODIGO AS AUX_NORMAS_EDU,*/
+            FDD.POR_PENSION AS PORC_PENSION,
+            FDD.POR_FSP AS PORC_FSP,
+            FDD.POR_EDU AS PORC_EDU 
+            FROM FONDOS FD
+            LEFT JOIN TIPO_DOCUMENTO TD ON TD.TIP_ID = FD.TIP_ID
+            INNER JOIN TIPO_DE_FONDO TPF ON TPF.TPF_ID = FD.TPF_ID
+            INNER JOIN FONDOS_DETALLE FDD ON FDD.FOND_ID = FD.FOND_ID
+            /*LEFT JOIN BDCONTABLE.CUENTA CT ON CT.ID = FDD.CTA_AUXCONTABLE_PENSION	
+            LEFT JOIN BDCONTABLE.CUENTA CTD ON CTD.ID = FDD.CTA_AUXFISCAL_PENSION
+            LEFT JOIN BDCONTABLE.CUENTA CTT ON CTT.ID = FDD.CTA_AUXNORMAS_PENSION
+            LEFT JOIN BDCONTABLE.CUENTA CTC ON CTC.ID = FDD.CTA_AUXCONTABLE_FSP
+            LEFT JOIN BDCONTABLE.CUENTA CTQ ON CTQ.ID = FDD.CTA_AUXFISCAL_FSP
+            LEFT JOIN BDCONTABLE.CUENTA CTS ON CTS.ID = FDD.CTA_AUXNORMAS_FSP
+            LEFT JOIN BDCONTABLE.CUENTA CTO ON CTO.ID = FDD.CTA_AUXCONTABLE_EDU
+            LEFT JOIN BDCONTABLE.CUENTA CTN ON CTN.ID = FDD.CTA_AUXFISCAL_EDU
+            LEFT JOIN BDCONTABLE.CUENTA CTV ON CTV.ID = FDD.CTA_AUXNORMAS_EDU*/
+            WHERE
+            FD.TFOE_ID = 1
+        </sql>
+    </LISTAR_FONDO_PENSION>
+    <LISTAR_FONDO_EPS>
+        <sql>
+            SELECT
+            FD.FOND_ID AS FONDO_ID,
+            FD.FOND_CODIGO AS CODIGO,
+            FD.FOND_DESCRIPCION AS RAZON_SOCIAL,
+            TD.TIP_DESCRIPCION AS TIPO_DOCUMENTO,
+            TD.TIP_ID AS TIPO_DOCUMENTO_ID,
+            FD.FOND_DOCUMENTO AS NUMERO_DOCUMENTO,
+            TPF.TPF_DESCRIPCION AS TIPO_DE_FONDO,
+            TPF.TPF_ID AS TIPO_DE_DONDO_ID,
+            FD.FOND_COD_ADMIN AS COD_ADMISINISTRADORA,
+            CASE
+            WHEN FD.FOND_ESTADO = "A" THEN
+            "ACTIVO" 
+            WHEN FD.FOND_ESTADO = "I" THEN
+            "INACTIVO" 
+            END AS ESTADO_FONDO,
+            FD.FOND_ESTADO AS ESTADO,
+            FDD.POR_SALUD AS PORC_SALUD,
+            FDD.CTA_AUXCONTABLE_SALUD AS AUX_CONT_SALUD_ID,
+            CT.CODIGO AS AUX_CONT_SALUD,
+            FDD.CTA_AUXFISCAL_SALUD AS AUX_FISCAL_SALUD_ID,
+            CT.CODIGO AS AUX_FISCAL_SALUD,
+            FDD.CTA_AUXNORMAS_SALUD AS AUX_NORMAS_SALUD_ID,
+            CTT.CODIGO AS AUX_NORMAS_SALUD 
+            FROM
+            FONDOS FD
+            INNER JOIN TIPO_DOCUMENTO TD ON TD.TIP_ID = FD.TIP_ID
+            INNER JOIN TIPO_DE_FONDO TPF ON TPF.TPF_ID = FD.TPF_ID
+            INNER JOIN FONDOS_DETALLE FDD ON FDD.FOND_ID = FD.FOND_ID
+            LEFT JOIN BDCONTABLE.CUENTA CT ON CT.ID = FDD.CTA_AUXCONTABLE_SALUD
+            LEFT JOIN BDCONTABLE.CUENTA CTD ON CTD.ID = FDD.CTA_AUXFISCAL_SALUD
+            LEFT JOIN BDCONTABLE.CUENTA CTT ON CTT.ID = FDD.CTA_AUXNORMAS_SALUD 
+            WHERE
+            FD.TFOE_ID = "2"
+        </sql>
+    </LISTAR_FONDO_EPS>
+
+    <ACTUALIZAR_FONDOS>
+        <sql>
+            UPDATE FONDOS SET
+            TFOE_ID = ?,
+            FOND_COD_ADMIN =?,
+            FOND_DESCRIPCION = ?,
+            TIP_ID = ?,
+            FOND_DOCUMENTO = ?,
+            FOND_CODIGO = ?,
+            FOND_ESTADO = ?,
+            TPF_ID = ?
+            WHERE FOND_ID = ?
+        </sql>
+    </ACTUALIZAR_FONDOS>
+    <ACTUALIZAR_FONDOS_DETALLE>
+        <sql>
+            UPDATE FONDOS_DETALLE SET
+            POR_PENSION = ?,
+            POR_FSP = ?,
+            POR_EDU = ?
+            WHERE FOND_ID = ?
+        </sql>
+    </ACTUALIZAR_FONDOS_DETALLE>
+    <ACTUALIZAR_FONDOS_EPS>
+        <sql>
+            UPDATE FONDOS SET
+            TFOE_ID = ?,
+            FOND_COD_ADMIN =?,
+            FOND_DESCRIPCION = ?,
+            TIP_ID = ?,
+            FOND_DOCUMENTO = ?,
+            FOND_CODIGO = ?,
+            FOND_ESTADO = ?,
+            TPF_ID = ?
+            WHERE FOND_ID = ?
+        </sql>
+    </ACTUALIZAR_FONDOS_EPS>
+    <ACTUALIZAR_FONDOS_DETALLE_EPS>
+        <sql>
+            UPDATE FONDOS_DETALLE SET
+            POR_SALUD = ?
+            WHERE FOND_ID = ?
+        </sql>
+    </ACTUALIZAR_FONDOS_DETALLE_EPS>
+    <CONSULTAR_CUENTA_CONTABLE>
+        <sql>
+            SELECT
+            CT.CODIGO AS CUENTA,
+            CT.DENOMINACION AS NOMBRE,
+            CT.ID AS ID_CUENTA
+            FROM
+            CUENTA CT
+            WHERE CT.CODIGO REGEXP ? OR CT.DENOMINACION REGEXP ?
+        </sql>
+    </CONSULTAR_CUENTA_CONTABLE>
+    <ELIMINAR_PENSION_DETALLE>
+        <sql>
+            DELETE FROM FONDOS WHERE FOND_ID = ?;
+        </sql>
+    </ELIMINAR_PENSION_DETALLE>
+    <ELIMINAR_PENSION>
+        <sql>
+            DELETE FROM FONDOS_DETALLE WHERE FOND_ID = ?;
+        </sql>
+    </ELIMINAR_PENSION>
+    <ELIMINAR_EPS_DETALLE>
+        <sql>
+           DELETE FROM FONDOS_DETALLE WHERE FOND_ID = ?;
+        </sql>
+    </ELIMINAR_EPS_DETALLE>
+    <ELIMINAR_EPS>
+        <sql>
+             DELETE FROM FONDOS WHERE FOND_ID = ?;
+        </sql>
+    </ELIMINAR_EPS>
+</root>

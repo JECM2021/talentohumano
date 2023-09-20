@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="342d232d-c6a0-4503-a79f-6b1819afdc4a">
+	<property name="ireport.zoom" value="1.948717100000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idp" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+	 TPLQ.tlqn_descripcion AS TIPO_LIQUIDACION,
+	 NMA.nomina_descripcion AS DESCRIPCION_NOMINA,
+	 MES.mes_descripcion AS MESES_DESCRIPCION,
+	 NMA.nomina_year AS NOMINA_YEAR,
+	 CONCAT(EMPL.empl_primer_apellido," ",empl_segundo_apellido," ",EMPL.empl_primer_nombre," ",EMPL.emple_segundo_nombre) AS NOMBRE_EMPLEADO,
+	 EMPL.num_documento AS DOCUMENTO,
+	 NMD.nomd_Salario AS SALARIO,
+	 NMD.nomd_Tdevengado AS TOTAL_DEVENGADO,
+	 NMD.nomd_Salud AS SALUD,
+	 NMD.nomd_Pension AS PENSION,
+	 NMD.nomd_Npagar AS NETO_PAGAR,
+	 NMD.nomd_fsp AS FSP,
+	 CRG.crg_descripcion AS CARGO,
+	EMP.RUTA_LOG AS RUTA,
+	 CT.CTRA_NUMERO AS NUMERO_CONTRATO,
+	CT.SALARIO_POR_DIA AS SALARIO_DIA,
+	CC.NOMBRE AS CENTRO_COSTO,
+	NMD.NOMD_AUXTRANSPORTE AS AUXILIO_TRANSPORTE,
+	 SUM(NMD.NOMD_SALUD + NMD.NOMD_PENSION)AS  DESCUENTOS
+FROM
+	nomina_detalle NMD
+INNER JOIN NOMINAS NMA ON NMA.nomina_id = NMD.nomina_id
+INNER JOIN empleados EMPL ON EMPL.empl_id = NMD.empl_id
+INNER JOIN tipo_liquidarcion_nomina TPLQ ON TPLQ.tlqn_id = NMA.tlqn_id
+INNER JOIN meses_del_ano MES ON MES.mes_id = NMA.mes_id
+INNER JOIN contrato CT ON CT.empl_id = EMPL.empl_id
+INNER JOIN cargos CRG ON CRG.crg_id = CT.crg_id
+INNER JOIN CONFIGURACIONESNOM.EMPRESA EMP ON EMP.EMP_ESTADO = 'A'
+INNER JOIN BDCONTABLE.CENTRODECOSTO CC ON CC.ID = CT.CTDC_ID
+WHERE NMD.nomina_id =$P{idp} GROUP BY NMD.EMPL_ID]]>
+	</queryString>
+	<field name="TIPO_LIQUIDACION" class="java.lang.String"/>
+	<field name="DESCRIPCION_NOMINA" class="java.lang.String"/>
+	<field name="MESES_DESCRIPCION" class="java.lang.String"/>
+	<field name="NOMINA_YEAR" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NOMBRE_EMPLEADO" class="java.lang.String"/>
+	<field name="DOCUMENTO" class="java.lang.String"/>
+	<field name="SALARIO" class="java.lang.Integer"/>
+	<field name="TOTAL_DEVENGADO" class="java.lang.Integer"/>
+	<field name="SALUD" class="java.lang.Integer"/>
+	<field name="PENSION" class="java.lang.Integer"/>
+	<field name="NETO_PAGAR" class="java.lang.Integer"/>
+	<field name="FSP" class="java.lang.Integer"/>
+	<field name="CARGO" class="java.lang.String"/>
+	<field name="RUTA" class="java.lang.String"/>
+	<field name="NUMERO_CONTRATO" class="java.lang.String"/>
+	<field name="SALARIO_DIA" class="java.lang.Integer"/>
+	<field name="CENTRO_COSTO" class="java.lang.String"/>
+	<field name="AUXILIO_TRANSPORTE" class="java.lang.Integer"/>
+	<field name="DESCUENTOS" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="471" splitType="Stretch">
+			<textField>
+				<reportElement x="269" y="56" width="197" height="15" uuid="bebbe31e-f578-4ddf-ad06-7fe6434511c2"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOMBRE_EMPLEADO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="187" y="56" width="100" height="15" uuid="3084bdf7-daf5-4544-bc29-0fbcf9fe5259"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<text><![CDATA[NOMBRE EMPLEADO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="56" width="145" height="15" uuid="cea33cb9-1077-4e66-a963-d785d7066b3c"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<text><![CDATA[CEDULA DE CIUDADANIA N°:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="119" y="56" width="100" height="15" uuid="5a3f4ddf-4804-465b-aeb6-da175617b9d4"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DOCUMENTO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="434" y="56" width="100" height="15" uuid="41af8ac6-8ff5-4f26-8927-ed7ffda73443"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<text><![CDATA[CONTRATO N°:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="493" y="56" width="69" height="15" uuid="0dba0474-d08e-4820-808c-3e87828d08cb"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NUMERO_CONTRATO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="72" width="100" height="15" uuid="b157c2ec-5947-4839-a00a-c6d18e8eb8c1"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<text><![CDATA[CARGO: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="33" y="72" width="154" height="15" uuid="2a321539-8626-4c56-8db0-f30cd80d3654"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CARGO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="186" y="72" width="100" height="15" uuid="0c0bbedb-d68f-4c5c-9ccf-d4ce8dbe9807"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<text><![CDATA[SUELDO MES:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="244" y="72" width="100" height="15" uuid="107eba5c-43fb-4b08-ac37-ab6d72c42af3"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SALARIO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="434" y="72" width="100" height="15" uuid="26b21902-e488-4c09-8eff-c51a22f1baa5"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<text><![CDATA[SUELDO DIA:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="490" y="72" width="72" height="15" uuid="b7ca9860-1ccf-40c3-a399-dc8edc66e6df"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SALARIO_DIA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="88" width="100" height="15" uuid="58ff96a2-5986-42bc-8352-571d5b2375ab"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<text><![CDATA[CENTRO DE COSTO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="88" width="158" height="15" uuid="ea909c1a-d252-4729-8f43-8da374979fd7"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CENTRO_COSTO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="161" y="12" width="261" height="20" uuid="aca594b5-c1e2-48e7-a5cb-a2620d16d0e3"/>
+				<textElement>
+					<font fontName="Courier New" size="14"/>
+				</textElement>
+				<text><![CDATA[COMPROBANTE DE PAGO DE NOMINA]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="51" width="555" height="1" uuid="92368fdd-67e9-49de-835b-b027b4f50e36"/>
+			</line>
+			<line>
+				<reportElement x="0" y="108" width="555" height="1" uuid="c22d8dc8-c7d9-4400-9686-eacd7aa8ffaf"/>
+			</line>
+			<line>
+				<reportElement x="0" y="127" width="555" height="1" uuid="083f7440-5bba-4b8c-8cc6-473978903c34"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="109" width="100" height="20" uuid="e56d3176-c121-4e39-9135-8053d6d7101b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<text><![CDATA[CONCEPTOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="255" y="109" width="100" height="20" uuid="8727cf89-3aa7-4958-8e3f-527757d81f20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<text><![CDATA[DEDUCCIONES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="432" y="109" width="123" height="20" uuid="06758af8-582f-49b0-ac85-6f40fbb56c41"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<text><![CDATA[VALORES PARCIALES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="130" width="100" height="15" uuid="1a7cff73-c6e9-4599-9c48-417cd49f9a91"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<text><![CDATA[SUELDO BASICO]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="459" y="130" width="100" height="15" uuid="19d0d633-2cc9-4872-8dd6-055c4ed9f59d"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SALARIO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="16" y="142" width="113" height="15" uuid="1712aadb-73a8-40be-a2c3-aa0049ed90ca"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<text><![CDATA[SUBSIDIO TRANSPORTE]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="459" y="141" width="100" height="15" uuid="9e7815f8-20f8-4d5c-8490-27ee0f1f65a1"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{AUXILIO_TRANSPORTE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="16" y="154" width="100" height="15" uuid="25632f67-4d87-43c7-bf1d-d24a92768cd7"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<text><![CDATA[PENSION]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="282" y="153" width="100" height="15" uuid="eda59083-290c-4a54-964b-fee1ac53694b"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PENSION}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="459" y="153" width="100" height="15" uuid="cd2ed9af-6775-46c5-bc89-8dfd22687930"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PENSION}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="16" y="166" width="100" height="15" uuid="dc14f12d-0822-454e-89ac-82ff79e79463"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<text><![CDATA[SALUD]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="282" y="166" width="100" height="15" uuid="dfdf7da5-ad6c-415f-befa-d3ca90451f2a"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SALUD}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="459" y="166" width="100" height="15" uuid="3cdbc80d-42b1-4a4d-93ec-e01e2c15c108"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SALUD}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="16" y="226" width="100" height="15" uuid="619f6278-272b-430e-bb08-70809bed98c0"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<text><![CDATA[TOTAL DEVENGADO:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="101" y="226" width="100" height="15" uuid="834bc941-ff1f-4d3b-9bae-4b12d7c792a3"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TOTAL_DEVENGADO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="403" y="226" width="100" height="15" uuid="ea9b8bc1-ee8b-4327-b9c2-3ea7261cb13b"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<text><![CDATA[NETO PAGAR:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="460" y="226" width="100" height="15" uuid="fd601d8b-a9d0-4b74-991f-1ac2f0be4a38"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NETO_PAGAR}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="221" y="226" width="100" height="15" uuid="ee26c30a-68c6-4da2-84a2-5c306859633a"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<text><![CDATA[DESCUENTOS:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="282" y="226" width="100" height="15" uuid="666bfc8f-b547-40a2-96ea-dc4e37ec1a4e"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DESCUENTOS}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="35" width="52" height="15" uuid="f1f4e05d-65a4-4e07-ba92-6be931e06805"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<text><![CDATA[PERIODO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="42" y="35" width="117" height="15" uuid="35bd57cd-f318-4f0c-b3a2-1a8dd5ee2904"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DESCRIPCION_NOMINA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="149" y="35" width="100" height="15" uuid="ba4bcb46-decb-4c98-83ff-c0fbeb4c61ca"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOMINA_YEAR}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,117 @@
+<root>
+    <LISTAR_COMBO_TIPO_DOCUMENTO>
+        <sql>
+            SELECT TIP_ID AS ID, TIP_DESCRIPCION AS DESCRIPCION  FROM TIPO_DOCUMENTO;
+        </sql>
+    </LISTAR_COMBO_TIPO_DOCUMENTO>
+    <LISTAR_COMBO_ESTADO_CIVIL>
+        <sql>
+            SELECT ETC_ID AS ID, ETC_DESCRIPCION AS DESCRIPCION FROM ESTADO_CIVIL;
+        </sql>
+    </LISTAR_COMBO_ESTADO_CIVIL>
+    <LISTAR_COMBO_SEXO>
+        <sql>
+            SELECT SEX_ID AS ID, SEX_DESCRIPCION AS DESCRIPCION FROM SEXO;
+        </sql>
+    </LISTAR_COMBO_SEXO>
+    <LISTAR_COMBO_GRUPO_SANGUINEO>
+        <sql>
+            SELECT GRS_ID AS ID, GRS_DESCRIPCION AS DESCRIPCION FROM GRUPO_SANGUINEO;
+        </sql>
+    </LISTAR_COMBO_GRUPO_SANGUINEO>
+    <LISTAR_COMBO_ESCOLARIDAD>
+        <sql>
+            SELECT NDE_ID AS ID, NDE_DESCRIPCION AS DESCRIPCION FROM NIVEL_DE_ESCOLARIDAD;
+        </sql>
+    </LISTAR_COMBO_ESCOLARIDAD>
+    <LISTAR_NIVEL_SOCIOECONOMICO>
+        <sql>
+             SELECT ETS_ID AS ID, EST_DESCRIPCION AS DESCRIPCION FROM ESTRATO_SOCIAL;
+        </sql>
+    </LISTAR_NIVEL_SOCIOECONOMICO>
+    <LISTAR_DEPARTAMENTOS>
+        <sql>
+             SELECT DEP_ID AS ID, DEP_DESCRIPCION AS DESCRIPCION FROM DEPARTAMENTO;
+        </sql>
+    </LISTAR_DEPARTAMENTOS>
+    <LISTAR_CIUDAD>
+        <sql>
+            SELECT CIU_ID AS ID, CIU_DESCRIPCION AS DESCRIPCION FROM CIUDAD WHERE DEP_ID =?;
+        </sql>
+    </LISTAR_CIUDAD>
+    <CONSULTAR_DOCUMENTO_EMPLEADO>
+        <sql>
+            SELECT NUM_DOCUMENTO FROM EMPLEADOS WHERE NUM_DOCUMENTO = ?;
+        </sql>
+    </CONSULTAR_DOCUMENTO_EMPLEADO>
+    <REGISTRAR_DOCUMENTO>
+        <sql>
+            INSERT INTO EMPLEADOS (
+            TIP_ID,
+            NUM_DOCUMENTO,
+            EMPL_PRIMER_NOMBRE,
+            EMPLE_SEGUNDO_NOMBRE,
+            EMPL_PRIMER_APELLIDO,
+            EMPL_SEGUNDO_APELLIDO,
+            EMPL_FECHA_NACIMIENTO,
+            DEP_ID,
+            CIU_ID,
+            ETC_ID,
+            SEX_ID,
+            GRS_ID,
+            ETS_ID,
+            EMPL_CORREO,
+            NDE_ID,
+            EMPL_ESTADO
+            )VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+        </sql>
+    </REGISTRAR_DOCUMENTO>
+    <CONSULTAR_EMPLEADOS>
+        <sql>
+            SELECT
+            EMPL_ID AS IDEMPLEADO,
+            TIP_ID AS TIPODOCUMENTO,
+            NUM_DOCUMENTO AS NUMDOCUMENTO,
+            EMPL_PRIMER_NOMBRE AS PRIMERNOMBRE,
+            EMPLE_SEGUNDO_NOMBRE AS SEGUNDONOMBRE,
+            EMPL_PRIMER_APELLIDO AS PRIMERAPELLIDO,
+            EMPL_SEGUNDO_APELLIDO AS SEGUNDOAPELLIDO,
+            DATE(EMPL_FECHA_NACIMIENTO) AS FECHANACIMIENTO,
+            DEP_ID AS DEPARTAMENTO,
+            CIU_ID AS CIUDAD,
+            ETC_ID AS ESTADOCIVIL,
+            SEX_ID AS SEXO,
+            GRS_ID AS GRUPOSANGUINEO,
+            ETS_ID AS ESTRATOSOCIAL,
+            EMPL_CORREO AS EMAIL,
+            NDE_ID AS NIVELESCOLAR,
+            EMPL_ESTADO AS ESTADO
+            FROM
+            EMPLEADOS
+            WHERE NUM_DOCUMENTO = ?
+        </sql>
+    </CONSULTAR_EMPLEADOS>
+    <ACTUALIZAR_EMPLEADO>
+        <sql>
+            UPDATE EMPLEADOS
+            SET TIP_ID = ?,
+            NUM_DOCUMENTO = ?,
+            EMPL_PRIMER_NOMBRE = ?,
+            EMPLE_SEGUNDO_NOMBRE = ?,
+            EMPL_PRIMER_APELLIDO = ?,
+            EMPL_SEGUNDO_APELLIDO = ?,
+            EMPL_FECHA_NACIMIENTO = ?,
+            DEP_ID = ?,
+            CIU_ID = ?,
+            ETC_ID = ?,
+            SEX_ID = ?,
+            GRS_ID = ?,
+            ETS_ID = ?,
+            EMPL_CORREO = ?,
+            NDE_ID = ?,
+            EMPL_ESTADO = ?
+            WHERE 
+            EMPL_ID = ?
+        </sql>
+    </ACTUALIZAR_EMPLEADO>
+</root>

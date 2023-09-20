@@ -1,0 +1,22 @@
+<root>
+    <REGISTRAR_CARGOS>
+        <sql>
+            INSERT INTO CARGOS (
+            CRG_CODIGO,
+            CRG_DESCRIPCION,
+            CRG_FECHA_CREACION,
+            CRG_ESTADO)VALUES(?,?,?,?);
+        </sql>
+    </REGISTRAR_CARGOS>
+    <ACTUALIZAR_CARGOS>
+        <sql>
+            UPDATE CARGOS 
+            SET CRG_CODIGO = ?,
+            CRG_DESCRIPCION =?,
+            CRG_FECHA_CREACION =?,
+            CRG_ESTADO =? 
+            WHERE
+            CRG_ID = ?
+        </sql>
+    </ACTUALIZAR_CARGOS>
+</root>

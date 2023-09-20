@@ -1,0 +1,37 @@
+<root>
+    <LISTAR_TIPO_CONCEPTO>
+        <sql>
+            SELECT
+            TPCPT_ID AS ID,
+            TPCPT_DESCRIPCION AS DESCRIPCION	
+            FROM
+            TIPO_CONCEPTO
+        </sql>
+    </LISTAR_TIPO_CONCEPTO>
+    <CONSULTAR_TIPO_CONCEPTO>
+        <sql>
+            SELECT
+            CPTN_CODIGO AS CODIGO,
+            CPTN_DESCRIPCION AS DESCRIPCION
+            FROM
+            CONCEPTOS_DE_NOMINA
+            WHERE CPTN_CODIGO =? OR CPTN_DESCRIPCION=?
+        </sql>
+    </CONSULTAR_TIPO_CONCEPTO>
+    <REGISTRAR_TIPO_CONCEPTO>
+        <sql>
+             INSERT INTO CONCEPTOS_DE_NOMINA (CPTN_CODIGO,TPCPT_ID,CPTN_DESCRIPCION,CPTN_ESTADO)VALUES(?,?,?,?)
+        </sql>
+    </REGISTRAR_TIPO_CONCEPTO>
+
+    <ACTUALIZAR_CONCEPTOS>
+        <sql>
+            UPDATE CONCEPTOS_DE_NOMINA SET
+            CPTN_CODIGO = ?,
+            TPCPT_ID = ?,
+            CPTN_DESCRIPCION = ?,
+            CPTN_ESTADO = ?
+            WHERE CPTN_ID = ?
+        </sql>
+    </ACTUALIZAR_CONCEPTOS>
+</root>

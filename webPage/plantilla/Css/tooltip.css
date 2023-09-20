@@ -1,0 +1,49 @@
+.tooltip {
+      display: none;
+      position: absolute;
+
+      width: 150px;
+      padding: 5px 10px;
+
+      border-radius: 3px;
+      box-shadow: 2px 2px 2px #999;
+      background-color: #AEC6CF;
+      font-size: .8em;
+      color: #000;
+}
+
+.tooltip p {
+      position: relative;
+      z-index: 1;
+
+      margin: 0;
+}
+
+.tooltip span {
+      position: absolute;
+      left: 0;
+      top: 17px;
+
+      width: 15px;
+      height: 15px;
+      border-right: 1px solid #AEC6CF;
+      border-top: 1px solid #AEC6CF;
+      margin-left: 20px;
+      margin-top: -19px;
+ 
+      background: inherit;
+      -webkit-transform: rotate(-45deg);
+      -moz-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+}
+
+.tooltip.error {
+      background: brown;
+      color: #fff;
+}
+
+.tooltip.error span {
+      border-right: 1px solid brown;
+      border-top: 1px solid brown;
+}
