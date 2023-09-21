@@ -142,7 +142,7 @@ function contratosvencer()
             $json = json_encode($listadocontratovencer);
             echo $json;
         } else {
-            echo "";
+            echo 0;
         }
     } catch (Exception $exc) {
         echo $exc->getTraceAsString();
