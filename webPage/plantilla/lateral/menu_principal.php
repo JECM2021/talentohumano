@@ -96,7 +96,7 @@ $class = isset($_GET["page"]) ? $_GET["page"] : 'treeview active';
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"><?php echo $nombreUsuario ?> <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li data-toggle="modal" data-toggle="modal" data-target="#modalConfiguracionUser"><a href="#"><i class="fa fa-user-circle" aria-hidden="true"></i> Seguridad</a></li>
-                    <li><a href="/nomina/php_cerrar"><i class="fa fa-sign-out" aria-hidden="true"></i> Cerrar sesión</a></li>
+                    <li><a href="/talentohumano/php_cerrar"><i class="fa fa-sign-out" aria-hidden="true"></i> Cerrar sesión</a></li>
                 </ul>
             </li>
         </ul>

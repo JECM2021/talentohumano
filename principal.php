@@ -30,7 +30,7 @@ $empresa = $_SESSION['empEmpresa'];
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
 
                     <div class="dropdown-divider"></div>
-                    <a href="/talentohumano/php_cerrar"><i class="fa fa-sign-out" aria-hidden="true"></i> Cerrar sesión</a>
+                    <a href="../talentohumano/php_cerrar.php"><i class="fa fa-sign-out" aria-hidden="true"></i> Cerrar sesión</a>
                 </div>
             </li>
         </ul>
