@@ -194,6 +194,10 @@ function registrarEmpleado()
     $estado = addslashes(htmlspecialchars($_POST["estado"]));
     $editar = addslashes(htmlspecialchars($_POST["editar"]));
     $idEmpleado = addslashes(htmlspecialchars($_POST["idEmpleado"]));
+    $edad = addslashes(htmlspecialchars($_POST['edad']));
+    $telefono = addslashes(htmlspecialchars($_POST['telefono']));
+    $direccion = addslashes(htmlspecialchars($_POST['direccion']));
+    $barrio = addslashes(htmlspecialchars($_POST['barrio']));
     $EmpleadosVO = new EmpleadosVO();
     $EmpleadosVO->setTipoDocumento($tipoDocumento);
     $EmpleadosVO->setNumDocumento($numDocumento);
@@ -212,6 +216,10 @@ function registrarEmpleado()
     $EmpleadosVO->setNivelEscolaridad($nivelEscolaridad);
     $EmpleadosVO->setEstado($estado);
     $EmpleadosVO->setIdEmpleado($idEmpleado);
+    $EmpleadosVO->setEdad($edad);
+    $EmpleadosVO->setTelefono($telefono);
+    $EmpleadosVO->setDireccion($direccion);
+    $EmpleadosVO->setBarrio($barrio);
     $statusJson = array();
     try {
         $parametrosEmpleado = $mdlEmpleados->registrarEmpleados($EmpleadosVO);
@@ -268,6 +276,10 @@ function actulizarDatosEmpleado()
     $nivelEscolaridad = addslashes(htmlspecialchars($_POST["nivelEscolar"]));
     $estado = addslashes(htmlspecialchars($_POST["estado"]));
     // $editar = addslashes(htmlspecialchars($_POST["editar"]));
+    $edad = addslashes(htmlspecialchars($_POST['edad']));
+    $telefono = addslashes(htmlspecialchars($_POST['telefono']));
+    $direccion = addslashes(htmlspecialchars($_POST['direccion']));
+    $barrio = addslashes(htmlspecialchars($_POST['barrio']));
     $idEmpleado = addslashes(htmlspecialchars($_POST["idEmpleado"]));
 
     $EmpleadosVO = new EmpleadosVO();
@@ -287,6 +299,10 @@ function actulizarDatosEmpleado()
     $EmpleadosVO->setCorreo($correo);
     $EmpleadosVO->setNivelEscolaridad($nivelEscolaridad);
     $EmpleadosVO->setEstado($estado);
+    $EmpleadosVO->setEdad($edad);
+    $EmpleadosVO->setTelefono($telefono);
+    $EmpleadosVO->setDireccion($direccion);
+    $EmpleadosVO->setBarrio($barrio);
     $EmpleadosVO->setIdEmpleado($idEmpleado);
     $statusJson = array();
     try {

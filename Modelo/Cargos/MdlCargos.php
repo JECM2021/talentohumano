@@ -77,9 +77,14 @@ class mdlCargos extends conexion
             CRG_CODIGO AS CODIGO,
             CRG_DESCRIPCION AS DESCRIPCION,
             CRG_ESTADO AS ESTADO,
-            DATE(crg_fecha_creacion) AS FECHA_CREACION
-        FROM
-            CARGOS";
+            DATE( CRG_FECHA_CREACION ) AS FECHA_CREACION,
+            CASE
+            WHEN CRG_ESTADO = 'A' THEN
+            'ACTIVO' 
+            WHEN CRG_ESTADO = 'I' THEN
+            'INACTIVO' 
+            END AS ESTADOS
+            FROM CARGOS WHERE CRG_ESTADO = 'A'";
             $query = mysqli_query($conexion, $sql) or die("error");
             $totalData = mysqli_num_rows($query);
             $totalFiltered = $totalData;
@@ -98,7 +103,8 @@ class mdlCargos extends conexion
                     "CODIGO" => $row['CODIGO'],
                     "DESCRIPCION" => $row['DESCRIPCION'],
                     "ESTADO" => $row['ESTADO'],
-                    "FECHA_CREACION" => $row['FECHA_CREACION']
+                    "FECHA_CREACION" => $row['FECHA_CREACION'],
+                    "ESTADOS" => $row['ESTADOS']
                 );
             }
             $json_data = array(

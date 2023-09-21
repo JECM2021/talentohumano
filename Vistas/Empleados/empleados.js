@@ -284,6 +284,10 @@ function validarCampos() {
     var estado = $("#cmbEstadoEmpleado").val();
     var editar = $("#txtEditar").val();
     var idEmpleado = $("#txtIdEmpleado").val();
+    var edad = $("#txtEdad").val();
+    var telefono = $("#txtTelefono").val();
+    var direccion = $("#txtDireccion").val();
+    var barrio = $("#txtBarrio").val();
 
     if (tipoDocumento.length === 0) {
         alertify.alert('Mensaje', 'Seleccione un tipo de documento');
@@ -317,13 +321,13 @@ function validarCampos() {
         alertify.alert('Mensaje', 'Por favor seleccione el estado del empleado');
     } else {
         registrarEmpleado(tipoDocumento, numDocumento, primerNombre, segundoNombre, primerApellido, segundoApellido, fechaNacimiento, departamento, ciudad, estadoCivil, sexo,
-            grupoSanguineo, estratoSocial, correo, nivelEscolaridad, estado, editar, idEmpleado)
+            grupoSanguineo, estratoSocial, correo, nivelEscolaridad, estado, editar, idEmpleado, edad, telefono, direccion, barrio)
     }
 
 }
 
 function registrarEmpleado(tipoDocumento, numDocumento, primerNombre, segundoNombre, primerApellido, segundoApellido, fechaNacimiento, departamento, ciudad, estadoCivil, sexo,
-    grupoSanguineo, estratoSocial, correo, nivelEscolaridad, estado, editar, idEmpleado) {
+    grupoSanguineo, estratoSocial, correo, nivelEscolaridad, estado, editar, idEmpleado, edad, telefono, direccion, barrio) {
 
     var ur = CONTROLLEREMPLEADO;
     var op = 9;
@@ -349,7 +353,11 @@ function registrarEmpleado(tipoDocumento, numDocumento, primerNombre, segundoNom
             nivelEscolaridad: nivelEscolaridad,
             estado: estado,
             editar: editar,
-            idEmpleado: idEmpleado
+            idEmpleado: idEmpleado,
+            edad: edad,
+            telefono: telefono,
+            direccion: direccion,
+            barrio: barrio
         }),
         success: function(data) {
             var ret = eval('(' + data + ')');
@@ -384,6 +392,10 @@ function limpiarCampos() {
     $("#txtEmail").val('');
     $("#cmbNivelEscolaridad").val('').change();
     $("#cmbEstadoEmpleado").val('').change();
+    $("#txtEdad").val('');
+    $("#txtTelefono").val('');
+    $("#txtDireccion").val('');
+    $("#txtBarrio").val('');
 }
 
 function buscarEmpleados() {
@@ -417,6 +429,10 @@ function buscarEmpleados() {
                     $("#txtEmail").val(ret[0].EMAIL);
                     $("#cmbNivelEscolaridad").val(ret[0].NIVELESCOLAR).change();
                     $("#cmbEstadoEmpleado").val(ret[0].ESTADO).change();
+                    $("#txtEdad").val(ret[0].EDAD);
+                    $("#txtTelefono").val(ret[0].TELEFONO);
+                    $("#txtDireccion").val(ret[0].DIRECCION);
+                    $("#txtBarrio").val(ret[0].BARRIO);
                 } else {
                     alertify.error("No se encontro registro en la base de datos");
                 }
@@ -446,6 +462,10 @@ function actulizarDatosEmpleado() {
     var email = $("#txtEmail").val();
     var nivelEscolar = $("#cmbNivelEscolaridad").val();
     var estado = $("#cmbEstadoEmpleado").val();
+    var edad = $("#txtEdad").val();
+    var telefono = $("#txtTelefono").val();
+    var direccion = $("#txtDireccion").val();
+    var barrio = $("#txtBarrio").val();
 
     if (idEmpleado === "") {
         alertify.alert("Mensaje", 'Por favor vuelva a seleccionar el empleado.');
@@ -504,7 +524,11 @@ function actulizarDatosEmpleado() {
                         estratoSocial: estratoSocial,
                         email: email,
                         nivelEscolar: nivelEscolar,
-                        estado: estado
+                        estado: estado,
+                        edad: edad,
+                        telefono: telefono,
+                        direccion: direccion,
+                        barrio: barrio
                     }),
                     success: function(data) {
                         try {

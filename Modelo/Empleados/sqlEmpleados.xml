@@ -62,8 +62,12 @@
             ETS_ID,
             EMPL_CORREO,
             NDE_ID,
-            EMPL_ESTADO
-            )VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+            EMPL_ESTADO,
+            EMPL_EDAD,
+            EMPL_TELEFONO,
+            EMPL_DIRECCION,
+            EMPL_BARRIO
+            )VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
         </sql>
     </REGISTRAR_DOCUMENTO>
     <CONSULTAR_EMPLEADOS>
@@ -85,7 +89,11 @@
             ETS_ID AS ESTRATOSOCIAL,
             EMPL_CORREO AS EMAIL,
             NDE_ID AS NIVELESCOLAR,
-            EMPL_ESTADO AS ESTADO
+            EMPL_ESTADO AS ESTADO,
+            EMPL_EDAD AS EDAD,
+            EMPL_TELEFONO AS TELEFONO,
+            EMPL_DIRECCION AS DIRECCION,
+            EMPL_BARRIO AS BARRIO   
             FROM
             EMPLEADOS
             WHERE NUM_DOCUMENTO = ?
@@ -109,7 +117,11 @@
             ETS_ID = ?,
             EMPL_CORREO = ?,
             NDE_ID = ?,
-            EMPL_ESTADO = ?
+            EMPL_ESTADO = ?,
+            EMPL_EDAD = ?,
+            EMPL_TELEFONO = ?,
+            EMPL_DIRECCION =?,
+            EMPL_BARRIO = ?
             WHERE 
             EMPL_ID = ?
         </sql>

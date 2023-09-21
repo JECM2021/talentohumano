@@ -18,6 +18,30 @@ class EmpleadosVO
     public $nivelEscolaridad;
     public $estado;
     public $idEmpleado;
+    public $edad;
+    public $telefono;
+    public $direccion;
+    public $barrio;
+
+    function setEdad($edad)
+    {
+        $this->edad = $edad;
+    }
+
+    function setTelefono($telefono)
+    {
+        $this->telefono = $telefono;
+    }
+
+    function setDireccion($direccion)
+    {
+        $this->direccion = $direccion;
+    }
+
+    function setBarrio($barrio)
+    {
+        $this->barrio = $barrio;
+    }
 
     function setEstado($estado)
     {
@@ -90,6 +114,26 @@ class EmpleadosVO
         $this->idEmpleado = $idEmpleado;
     }
     //////////////////////////////////////////////////////////////////////////
+
+    function getEdad()
+    {
+        return $this->edad;
+    }
+
+    function getTelefono()
+    {
+        return $this->telefono;
+    }
+
+    function getDireccion()
+    {
+        return $this->telefono;
+    }
+
+    function getBarrio()
+    {
+        return $this->barrio;
+    }
 
     function getEstado()
     {

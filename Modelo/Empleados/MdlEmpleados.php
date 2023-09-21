@@ -227,6 +227,10 @@ class mdlEmpleados extends Conexion
             $nivelEscolaridad = $empleadosVO->getNivelEscolaridad();
             $estado = $empleadosVO->getEstado();
             $idEmpleado = $empleadosVO->getIdEmpleado();
+            $edad = $empleadosVO->getEdad();
+            $telefono = $empleadosVO->getTelefono();
+            $direccion = $empleadosVO->getDireccion();
+            $barrio = $empleadosVO->getBarrio();
 
             $respuesta = $conexion->prepare($this->getSql("CONSULTAR_DOCUMENTO_EMPLEADO", self::RUTA_SQL));
             $respuesta->bind_param('s', $numDocumento);
@@ -236,7 +240,7 @@ class mdlEmpleados extends Conexion
             if (count($row) === 0) {
                 $respuesta = $conexion->prepare($this->getSql("REGISTRAR_DOCUMENTO", self::RUTA_SQL));
                 // die(var_dump($tipoDocumento, $numDocumento, $primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $fechaNacimiento, $departamento, $ciudad, $estadoCivil, $sexo, $grupoSanguineo, $estratoSocial, $correo, $nivelEscolaridad, $estado));
-                $respuesta->bind_param('ssssssssssssssss', $tipoDocumento, $numDocumento, $primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $fechaNacimiento, $departamento, $ciudad, $estadoCivil, $sexo, $grupoSanguineo, $estratoSocial, $correo, $nivelEscolaridad, $estado);
+                $respuesta->bind_param('ssssssssssssssssssss', $tipoDocumento, $numDocumento, $primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $fechaNacimiento, $departamento, $ciudad, $estadoCivil, $sexo, $grupoSanguineo, $estratoSocial, $correo, $nivelEscolaridad, $estado, $edad, $telefono, $direccion, $barrio);
                 $filasAfectadas = $respuesta->execute() or ($respuesta->error);
                 if ($filasAfectadas > 0) {
                     $filasAfectadas = mysqli_insert_id($conexion);
@@ -285,7 +289,11 @@ class mdlEmpleados extends Conexion
                     "ESTRATOSOCIAL" => $row['ESTRATOSOCIAL'],
                     "EMAIL" => $row["EMAIL"],
                     "NIVELESCOLAR" => $row['NIVELESCOLAR'],
-                    "ESTADO" => $row['ESTADO']
+                    "ESTADO" => $row['ESTADO'],
+                    "EDAD" => $row['EDAD'],
+                    "TELEFONO" => $row['TELEFONO'],
+                    "DIRECCION" => $row['DIRECCION'],
+                    "BARRIO" => $row['BARRIO']
                 );
             }
         } catch (Exception $exc) {
@@ -320,10 +328,14 @@ class mdlEmpleados extends Conexion
             $nivelEscolaridad = $empleadosVO->getNivelEscolaridad();
             $estado = $empleadosVO->getEstado();
             $idEmpleado = $empleadosVO->getIdEmpleado();
+            $edad = $empleadosVO->getEdad();
+            $telefono = $empleadosVO->getTelefono();
+            $direccion = $empleadosVO->getDireccion();
+            $barrio = $empleadosVO->getBarrio();
             $respuesta = $conexion->prepare($this->getSql("ACTUALIZAR_EMPLEADO", self::RUTA_SQL));
             // die(var_dump($numDocumento));
             //die(var_dump($tipoDocumento, $numDocumento, $primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $fechaNacimiento, $departamento, $ciudad, $estadoCivil, $sexo, $grupoSanguineo, $estratoSocial, $correo, $nivelEscolaridad, $estado, $idEmpleado));
-            $respuesta->bind_param('sssssssssssssssss', $tipoDocumento, $numDocumento, $primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $fechaNacimiento, $departamento, $ciudad, $estadoCivil, $sexo, $grupoSanguineo, $estratoSocial, $correo, $nivelEscolaridad, $estado, $idEmpleado);
+            $respuesta->bind_param('sssssssssssssssssssss', $tipoDocumento, $numDocumento, $primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $fechaNacimiento, $departamento, $ciudad, $estadoCivil, $sexo, $grupoSanguineo, $estratoSocial, $correo, $nivelEscolaridad, $estado, $edad, $telefono, $direccion, $barrio, $idEmpleado);
             $filasAfectadas = $respuesta->execute() or dir($respuesta->error);
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();

@@ -76,6 +76,10 @@ include_once '../../Operaciones.php';
                                         <label>Fecha de Nacimiento</label>
                                         <input type="date" class="form-control input-sm" name="txtfechaDeNacimiento" id="txtfechaDeNacimiento" max="<?php echo date("Y-m-d"); ?>">
                                     </div>
+                                    <div class="col-md-2">
+                                        <label>Edad</label>
+                                        <input type="text" name="txtEdad" id="txtEdad" class="form-control input-sm solo-numero" value="">
+                                    </div>
                                     <div class=" col-md-2">
                                         <label>Departamento</label>
                                         <select class="form-control select2 input-sm" id="cmbDepartamento" onchange="listarComboCiudad(this, 'cmbCiudad')">
@@ -86,6 +90,16 @@ include_once '../../Operaciones.php';
                                         <select class="form-control select2 input-sm" id="cmbCiudad" name="cmbCiudad">
                                         </select>
                                     </div>
+                                    <div class="col-md-2">
+                                        <label>Barrio</label>
+                                        <input type="text" name="txtBarrio" id="txtBarrio" class="form-control input-sm" value="">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Direccion</label>
+                                        <input type="text" name="txtDireccion" id="txtDireccion" class="form-control input-sm" onkeyup="this.value = this.value.toUpperCase();" value="">
+                                    </div>
+                                </div><br>
+                                <div class="row">
                                     <div class="col-md-2">
                                         <label>Estado Civil</label>
                                         <select class="form-control select2 input-sm" id="cmbEstadoCivil" name="cmbEstadoCivil">
@@ -101,21 +115,27 @@ include_once '../../Operaciones.php';
                                         <select class="form-control select2 input-sm" id="cmbGrupoSanguineo" name="cmbGrupoSanguineo">
                                         </select>
                                     </div>
-                                </div><br>
-                                <div class="row">
                                     <div class="col-md-2">
                                         <label>Nivel Socio-Economico</label>
                                         <select class="form-control select2 input-sm" id="cmbEstratoSocial" name="cmbEstratoSocial">
                                         </select>
                                     </div>
-                                    <div class="col-md-4">
-                                        <label>Email</label>
-                                        <input type="text" name="txtEmail" id="txtEmail" class="form-control input-sm" onkeyup="this.value = this.value.toUpperCase();" value="">
-                                    </div>
+
                                     <div class="col-md-2">
                                         <label>Nivel de Escolaridad</label>
                                         <select class="form-control select2 input-sm" id="cmbNivelEscolaridad" name="cmbNivelEscolaridad">
                                         </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Telefono</label>
+                                        <input type="text" name="txtTelefono" id="txtTelefono" class="form-control input-sm solo-numero" value="">
+                                    </div>
+
+                                </div><br>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Email</label>
+                                        <input type="text" name="txtEmail" id="txtEmail" class="form-control input-sm" onkeyup="this.value = this.value.toUpperCase();" value="">
                                     </div>
                                     <div class="col-md-2">
                                         <label>Estado del Empleado</label>

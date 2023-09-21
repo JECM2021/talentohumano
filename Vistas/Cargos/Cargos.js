@@ -144,7 +144,7 @@ function visualizarCargos() {
             { name: "CODIGO", data: "CODIGO", width: "10%" },
             { name: "DESCRIPCION", data: "DESCRIPCION", width: "45%" },
             { name: "FECHA", data: "FECHA_CREACION", width: "15%" },
-            { name: "ESTADO", data: "ESTADO", width: "15%" },
+            { name: "ESTADOS", data: "ESTADOS", width: "15%" },
             {
                 name: "ORDEN",
                 data: null,
@@ -155,7 +155,7 @@ function visualizarCargos() {
                 width: "7%"
             }
         ],
-        order: [0, 'desc']
+        order: [1, 'asc']
     });
     $('div.dataTables_filter input').addClass('form-control input-sm');
 }
