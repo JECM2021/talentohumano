@@ -117,7 +117,8 @@ include_once '../../Operaciones.php';
                                                     </div>
                                                     <div class="col-md-4">
                                                         <label>Motivo de Retiro:</label>
-                                                        <select id="cmbMotivoRetiro" name="cmbMotivoRetiro" class="form-control input-sm "></select>
+                                                        <!-- <select id="cmbMotivoRetiro" name="cmbMotivoRetiro" class="form-control input-sm "></select>-->
+                                                        <input type="text" name="cmbMotivoRetiro" id="cmbMotivoRetiro" class="form-control input-sm " value="" onkeyup="this.value = this.value.toUpperCase();">
                                                     </div>
                                                 </div>
                                                 <div class="row">

@@ -1,10 +1,9 @@
 $(document).ready(function() {
     visualizarEmpleados();
-
     listarTipoDocumento('cmbTipoDocumento');
     listarCargos('cmbTipoCargo');
     listarTipoContrato('cmbTipoContrato');
-    listarMotivoRetiro('cmbMotivoRetiro');
+    // listarMotivoRetiro('cmbMotivoRetiro');
     listarFormaDePago('cmbFormaDePago');
     listarTipoCotizante('cmbTipoDeCotizante');
     listarArl('cmbArl');
