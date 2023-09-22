@@ -147,7 +147,7 @@ function visualizarpdf(index) {
     var archivo = listarDetalleAnexo[index].NOMBRE;
     //console.log(archivo);
     var loc = window.location.host;
-    $("#iframePDF").attr('src', 'http://' + loc + '/nomina/webPage/anexos/' + archivo);
+    $("#iframePDF").attr('src', 'http://' + loc + '/talentohumano/webPage/anexos/' + archivo);
 
 }
 
