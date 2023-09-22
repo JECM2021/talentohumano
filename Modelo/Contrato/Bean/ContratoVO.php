@@ -31,6 +31,12 @@ class ContratoVO
     public $tipoCuentaBanco;
     public $numeroCuentaBanco;
     public $idContrato;
+    public $areaTrabajo;
+
+    function setAreaTrabajo($areaTrabajo)
+    {
+        $this->areaTrabajo = $areaTrabajo;
+    }
 
     function setIdContrato($idContato)
     {
@@ -178,6 +184,11 @@ class ContratoVO
     }
 
     /////////////////////////////////////////////////////////////////////////////////
+
+    function getAreaTrabajo()
+    {
+        return $this->areaTrabajo;
+    }
 
     function getIdContrato()
     {

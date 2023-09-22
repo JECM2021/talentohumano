@@ -16,6 +16,7 @@ $(document).ready(function() {
     listarTipoDeCuenta('cmbTipoCuentaBancaria');
     listarCentroDeCosto('cmbCentroDeCosto');
     listarTipoAnexo('cmbTipoAnexo');
+    listarAreaTrabajo('cmbAreaTrabajo');
 
     $("#cmbArl").change(function(e) {
         var porcArl = $(this).find(":selected").data("item");
@@ -610,8 +611,8 @@ function validarContrato() {
     var cajaCompensacion = $("#cmbCajaDeCompensacion").val();
     var fondoCesantias = $("#cmbFondoCesantias").val();
     var centroCosto = $("#cmbCentroDeCosto").val();
-    var fechaInicioVacaciones = $("#txtFechaDeInicioVacaciones").val();
-    var fechaFinVacaciones = $("#txtFechaFinDeVacaciones").val();
+    // var fechaInicioVacaciones = $("#txtFechaDeInicioVacaciones").val();
+    // var fechaFinVacaciones = $("#txtFechaFinDeVacaciones").val();
     var ciudad = $("#cmbCiudadDondeLabora").val();
     var fondoSalud = $("#cmbFondoDeSalud").val();
     var porcentajeSalud = $("#txtPorcentajeSalud").val();
@@ -626,6 +627,7 @@ function validarContrato() {
     var anexoDocumento = $("#archivo").val();
     var nombreAnexo = $("#txtNombreAnexo").val();
     var descripcionAnexo = $("#txtDetalle").val();
+    var areaTrabajo = $("#cmbAreaTrabajo").val();
     var editar = $("#txtEditar").val();
     //console.log(editar);
     if (idEmpleado.length === 0) {
@@ -740,182 +742,42 @@ function validarContrato() {
 }*/
 
 function limpiarCampos() {
-    $("#frmAnexos")[0].reset()
-        /*$("#txtNombreEmpleado").val('');
-        $("#txtIdEmpleado").val('');
-        $("#cmbTipoDocumento").val('');
-        $("#txtNumDocumento").val('');
-        $("#cmbEstadoEmpleado").val('');
-        $("#txtNumContrato").val('');
-        $("#cmbTipoContrato").val('');
-        $("#cmbTipoCargo").val('');
-        $("#txtFechaDeInicio").val('');
-        $("#txtFechaDeTerminacion").val('');
-        $("#cmbMotivoRetiro").val('');
-        $("#txtSalarioActual").val('');
-        $("#txtSalarioActualDiario").val('');
-        $("#cmbFormaDePago").val('');
-        $("#cmbTipoDeCotizante").val('');
-        $("#cmbArl").val('');
-        $("#txtPorcentajeArl").val('');
-        $("#cmbCajaDeCompensacion").val('');
-        $("#cmbFondoCesantias").val('');
-        $("#cmbCentroDeCosto").val('');
-        $("#txtFechaDeInicioVacaciones").val('');
-        $("#txtFechaFinDeVacaciones").val('');
-        $("#cmbCiudadDondeLabora").val('');
-        $("#cmbFondoDeSalud").val('');
-        $("#txtPorcentajeSalud").val('');
-        $("#txtFechaInicioSalud").val('');
-        $("#cmbFondoDePension").val('');
-        $("#txtPorcentajePension").val('');
-        $("#txtFechaInicioPension").val('');
-        $("#cmbBancos").val('');
-        $("#cmbTipoCuentaBancaria").val('');
-        $("#txtNumCuenta").val('');
-        $("#cmbTipoAnexo").val('');
-        $("#archivo").val('');
-        $("#txtNombreAnexo").val('');
-        $("#txtDetalle").val('');
-        $("#btnGuardar").text("Guardar");*/
+    $("#frmAnexos")[0].reset();
 }
 
-/*function actualizarContrato() {
-    var idEmpleado = $("#txtIdEmpleado").val();
-    var numContrato = $("#txtNumContrato").val();
-    var tipoContrato = $("#cmbTipoContrato").val();
-    var cargos = $("#cmbTipoCargo").val();
-    var fechaInicioContrato = $("#txtFechaDeInicio").val();
-    var fechaCulminacionContrato = $("#txtFechaDeTerminacion").val();
-    var motivoRetiro = $("#cmbMotivoRetiro").val();
-    var salarioTotal = $("#txtSalarioActual").val();
-    var salarioDia = $("#txtSalarioActualDiario").val();
-    var formaPago = $("#cmbFormaDePago").val();
-    var tipoCotizante = $("#cmbTipoDeCotizante").val();
-    var arl = $("#cmbArl").val();
-    var porcentajeArl = $("#txtPorcentajeArl").val();
-    var cajaCompensacion = $("#cmbCajaDeCompensacion").val();
-    var fondoCesantias = $("#cmbFondoCesantias").val();
-    var centroCosto = $("#cmbCentroDeCosto").val();
-    var fechaInicioVacaciones = $("#txtFechaDeInicioVacaciones").val();
-    var fechaFinVacaciones = $("#txtFechaFinDeVacaciones").val();
-    var ciudad = $("#cmbCiudadDondeLabora").val();
-    var fondoSalud = $("#cmbFondoDeSalud").val();
-    var porcentajeSalud = $("#txtPorcentajeSalud").val();
-    var fechaInicioSalud = $("#txtFechaInicioSalud").val();
-    var fondoPension = $("#cmbFondoDePension").val();
-    var porcentajePension = $("#txtPorcentajePension").val();
-    var fechaInicioPension = $("#txtFechaInicioPension").val();
-    var bancos = $("#cmbBancos").val();
-    var tipoCuetaBanco = $("#cmbTipoCuentaBancaria").val();
-    var numeroCuentaBanco = $("#txtNumCuenta").val();
 
-    if (idEmpleado.length === 0) {
-        alertify.alert('Mensaje', 'Por favor seleccione un empleado');
-    } else if (numContrato.length === 0) {
-        alertify.alert('Mensaje', 'Por favor seleccione un numero de contrato');
-    } else if (tipoContrato.length === 0) {
-        alertify.alert('Mensaje', 'Por favor seleccione un tipo de contrato');
-    } else if (cargos.length === 0) {
-        alertify.alert('Mensaje', 'Por favor seleccione un tipo de contrato');
-    } else if (fechaInicioContrato.length === 0) {
-        alertify.alert('Mensaje', 'Por favor seleccione la fecha de inicio de contrato');
-    } else if (salarioTotal.length === 0) {
-        alertify.alert('Mensaje', 'Por favor digite el salario total');
-    } else if (formaPago.length === 0) {
-        alertify.alert('Mensaje', 'Por favor seleccione una forma de pago');
-    } else if (tipoCotizante.length === 0) {
-        alertify.alert('Mensaje', 'Por favor seleccione un tipo cotizante');
-    } else if (arl.length === 0) {
-        alertify.alert('Mensaje', 'Por favor seleccione la Arl');
-    } else if (cajaCompensacion.length === 0) {
-        alertify.alert('Mensaje', 'Por favor seleccione la caja de compensacion');
-    } else if (fondoCesantias.length === 0) {
-        alertify.alert('Mensaje', 'Por favor seleccione fondo cesantias');
-    } else if (centroCosto.length === 0) {
-        alertify.alert('Mensaje', 'Por favor seleccione un centro de costo');
-    } else if (ciudad.length === 0) {
-        alertify.alert('Mensaje', 'Por favor seleccione la ciudad donde labora');
-    } else if (fondoSalud.length === 0) {
-        alertify.alert('Mensaje', 'Por favor seleccione un fondo de salud');
-    } else if (fechaInicioSalud.length === 0) {
-        alertify.alert('Mensaje', 'Por favor seleccione fecha de inicio salud');
-    } else if (fondoPension.length === 0) {
-        alertify.alert('Mensaje', 'Por favor seleccione un fondo de pension');
-    } else if (fechaInicioPension.length === 0) {
-        alertify.alert('Mensaje', 'Por favor seleccione fecha de inicio de pension');
-    } else if (bancos.length === 0) {
-        alertify.alert('Mensaje', 'Por favor seleccione un banco');
-    } else if (tipoCuetaBanco.length === 0) {
-        alertify.alert('Mensaje', 'Por favor seleccione un tipo de cuenta bancaria');
-    } else if (numeroCuentaBanco.length === 0) {
-        alertify.alert('Mensaje', 'Por favor seleccione un numerode cuenta bancaria');
-    } else {
-        alertify.confirm('Mensaje', '¿Esta seguro que desea actualizar datos del contrato. ?', function() {
-                $("#frmAnexos").submit();
-            }
-            
-                           var ur = CONTROLLERCONTRATO;
-                            var op = 19;
-                            $.ajax({
-                                type: "POST",
-                                url: ur,
-                                data: ({
-                                    op: op,
-                                    idEmpleado: idEmpleado,
-                                    numContrato: numContrato,
-                                    tipoContrato: tipoContrato,
-                                    cargos: cargos,
-                                    fechaInicioContrato: fechaInicioContrato,
-                                    fechaCulminacionContrato: fechaCulminacionContrato,
-                                    motivoRetiro: motivoRetiro,
-                                    salarioTotal: salarioTotal,
-                                    salarioDia: salarioDia,
-                                    formaPago: formaPago,
-                                    tipoCotizante: tipoCotizante,
-                                    arl: arl,
-                                    porcentajeArl: porcentajeArl,
-                                    cajaCompensacion: cajaCompensacion,
-                                    fondoCesantias: fondoCesantias,
-                                    centroCosto: centroCosto,
-                                    fechaInicioVacaciones: fechaInicioVacaciones,
-                                    fechaFinVacaciones: fechaFinVacaciones,
-                                    ciudad: ciudad,
-                                    fondoSalud: fondoSalud,
-                                    porcentajeSalud: porcentajeSalud,
-                                    fechaInicioSalud: fechaInicioSalud,
-                                    fondoPension: fondoPension,
-                                    porcentajePension: porcentajePension,
-                                    fechaInicioPension: fechaInicioPension,
-                                    bancos: bancos,
-                                    tipoCuetaBanco: tipoCuetaBanco,
-                                    numeroCuentaBanco: numeroCuentaBanco
-                                }),
-                                success: function(data) {
-                                    try {
-                                        var ret = eval('(' + data + ')');
-                                        if (ret.hasOwnProperty("success")) {
-                                            limpiarCampos();
-                                            alertify.success(ret.success);
-                                            visualizarEmpleados();
-                                        } else if (ret.hasOwnProperty("error")) {
-                                            alertify.alert('Mensaje', ret.error);
-                                        }
-                                    } catch (e) {}
-                                },
-                                error: function(objeto, error, error2) {
-                                    alertify.alert(error);
-                                }
-                            });
-                        },
-                    function() {}
-        );
-    }
-}*/
 
 function listarTipoAnexo(idCombo) {
     var ur = CONTROLLERCONTRATO;
     var op = 20;
+    $.ajax({
+        type: "POST",
+        url: ur,
+        data: ({
+            op: op
+        }),
+        success: function(data) {
+            var ret = eval('(' + data + ')');
+            try {
+                listarCombo = $("#" + idCombo);
+                listarCombo.html('');
+                var option = $("<option value=''>Seleccione</option>");
+                listarCombo.append(option);
+                for (var i = 0; i < ret.length; i++) {
+                    var option = $("<option value = " + ret[i].ID + ">" + ret[i].DESCRIPCION + "</option>");
+                    listarCombo.append(option);
+                }
+            } catch (e) {}
+        },
+        error: function(objeto, error, error2) {
+            alertify.alert(error);
+        }
+    });
+}
+
+function listarAreaTrabajo(idCombo) {
+    var ur = CONTROLLERCONTRATO;
+    var op = 21;
     $.ajax({
         type: "POST",
         url: ur,

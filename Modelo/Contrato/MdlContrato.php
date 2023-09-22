@@ -463,8 +463,8 @@ class mdlContrato extends Conexion
             $cajaCompensacion = $contratoVO->getCajaCompensacion();
             $fondoCesantias = $contratoVO->getFondoCesantias();
             $centroCosto = $contratoVO->getCentroDeCosto();
-            $fechaInicioVacaciones = $contratoVO->getFechaInicioVacaciones();
-            $fechaFinVacaciones = $contratoVO->getFechaFinVacaciones();
+            // $fechaInicioVacaciones = $contratoVO->getFechaInicioVacaciones();
+            // $fechaFinVacaciones = $contratoVO->getFechaFinVacaciones();
             $ciudad = $contratoVO->getCiudad();
             $fondoSalud = $contratoVO->getFondoSalud();
             $porcentajeSalud = $contratoVO->getPorcentajeSalud();
@@ -475,6 +475,7 @@ class mdlContrato extends Conexion
             $bancos = $contratoVO->getBancos();
             $tipoCuetaBanco = $contratoVO->getTipoCuentaBanco();
             $numeroCuentaBanco = $contratoVO->getNumeroCuentaBanco();
+            $areaTrabajo = $contratoVO->getAreaTrabajo();
             if (empty($motivoRetiro)) {
                 $motivoRetiro = null;
             }
@@ -485,7 +486,7 @@ class mdlContrato extends Conexion
             $row = $resultado->fetch_assoc();
             if (count($row) === 0) {
                 $respuesta = $conexion->prepare($this->getSql("ASIGNAR_CONTRATO", self::RUTA_SQL));
-                $respuesta->bind_param('ssssssssssssssssssssssssssss', $idEmpleado, $numContrato, $tipoContrato, $cargos, $fechaInicioContrato, $fechaCulminacionContrato, $motivoRetiro, $salarioTotal, $salarioDia, $formaPago, $tipoCotizante, $arl, $porcentajeArl, $cajaCompensacion, $fondoCesantias, $centroCosto, $fechaInicioVacaciones, $fechaFinVacaciones, $ciudad, $fondoSalud, $porcentajeSalud, $fechaInicioSalud, $fondoPension, $porcentajePension, $fechaInicioPension, $bancos, $tipoCuetaBanco, $numeroCuentaBanco);
+                $respuesta->bind_param('sssssssssssssssssssssssssss', $idEmpleado, $numContrato, $tipoContrato, $cargos, $fechaInicioContrato, $fechaCulminacionContrato, $motivoRetiro, $salarioTotal, $salarioDia, $formaPago, $tipoCotizante, $arl, $porcentajeArl, $cajaCompensacion, $fondoCesantias, $centroCosto, $areaTrabajo, $ciudad, $fondoSalud, $porcentajeSalud, $fechaInicioSalud, $fondoPension, $porcentajePension, $fechaInicioPension, $bancos, $tipoCuetaBanco, $numeroCuentaBanco);
                 $filasAfectadas = $respuesta->execute() or ($respuesta->error);
                 $idContato = mysqli_insert_id($conexion);
                 if ($filasAfectadas > 0) {
@@ -528,8 +529,9 @@ class mdlContrato extends Conexion
             $cajaCompensacion = $contratoVO->getCajaCompensacion();
             $fondoCesantias = $contratoVO->getFondoCesantias();
             $centroCosto = $contratoVO->getCentroDeCosto();
-            $fechaInicioVacaciones = $contratoVO->getFechaInicioVacaciones();
-            $fechaFinVacaciones = $contratoVO->getFechaFinVacaciones();
+            // $fechaInicioVacaciones = $contratoVO->getFechaInicioVacaciones();
+            // $fechaFinVacaciones = $contratoVO->getFechaFinVacaciones();
+            $areaTrabajo = $contratoVO->getAreaTrabajo();
             $ciudad = $contratoVO->getCiudad();
             $fondoSalud = $contratoVO->getFondoSalud();
             $porcentajeSalud = $contratoVO->getPorcentajeSalud();
@@ -545,7 +547,7 @@ class mdlContrato extends Conexion
                 $motivoRetiro = null;
             }
             $respuesta = $conexion->prepare($this->getSql("ACTUALIZAR_CONTRATO", self::RUTA_SQL));
-            $respuesta->bind_param('ssssssssssssssssssssssssssss', $numContrato, $tipoContrato, $cargos, $fechaInicioContrato, $fechaCulminacionContrato, $motivoRetiro, $salarioTotal, $salarioDia, $formaPago, $tipoCotizante, $arl, $porcentajeArl, $cajaCompensacion, $fondoCesantias, $centroCosto, $fechaInicioVacaciones, $fechaFinVacaciones, $ciudad, $fondoSalud, $porcentajeSalud, $fechaInicioSalud, $fondoPension, $porcentajePension, $fechaInicioPension, $bancos, $tipoCuetaBanco, $numeroCuentaBanco, $idEmpleado);
+            $respuesta->bind_param('ssssssssssssssssssssssssssss', $numContrato, $tipoContrato, $cargos, $fechaInicioContrato, $fechaCulminacionContrato, $motivoRetiro, $salarioTotal, $salarioDia, $formaPago, $tipoCotizante, $arl, $porcentajeArl, $cajaCompensacion, $fondoCesantias, $centroCosto, $areaTrabajo, $ciudad, $fondoSalud, $porcentajeSalud, $fechaInicioSalud, $fondoPension, $porcentajePension, $fechaInicioPension, $bancos, $tipoCuetaBanco, $numeroCuentaBanco, $idEmpleado);
             $filasAfectadas = $respuesta->execute() or dir($respuesta->error);
             if ($filasAfectadas > 0) {
                 $respuesta = $conexion->prepare($this->getSql("ASIGNAR_ANEXO", self::RUTA_SQL));
@@ -569,6 +571,31 @@ class mdlContrato extends Conexion
         try {
             $conexion = $this->conectarBd(self::ASISTENCIAL);
             $respuesta = $conexion->prepare($this->getSql("LISTAR_TIPO_ANEXO", self::RUTA_SQL));
+            $respuesta->execute();
+            $result = $respuesta->get_result();
+            while ($row = $result->fetch_assoc()) {
+                $rawdata[] = array(
+                    "ID" => $row['ID'],
+                    "DESCRIPCION" => $row['DESCRIPCION']
+                );
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+        try {
+            $this->descconectarBd($conexion);
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+        return $rawdata;
+    }
+
+    function listarAreaTrabajo()
+    {
+        $rawdata = array();
+        try {
+            $conexion = $this->conectarBd(self::ASISTENCIAL);
+            $respuesta = $conexion->prepare($this->getSql("LISTAR_AREA_TRABAJO", self::RUTA_SQL));
             $respuesta->execute();
             $result = $respuesta->get_result();
             while ($row = $result->fetch_assoc()) {

@@ -103,7 +103,7 @@ include_once '../../Operaciones.php';
                                                     </div>
                                                     <div class="col-md-4">
                                                         <label>Cargo:</label>
-                                                        <select id="cmbTipoCargo" name="cmbTipoCargo" class="form-control input-sm "></select>
+                                                        <select id="cmbTipoCargo" name="cmbTipoCargo" class="form-control input-sm select2"></select>
                                                     </div>
                                                 </div><br>
                                                 <div class="row">
@@ -159,22 +159,26 @@ include_once '../../Operaciones.php';
                                                         <select id="cmbFondoCesantias" name="cmbFondoCesantias" class="form-control input-sm "></select>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <label>Centro de Costo:</label>
+                                                        <label>Centro de Trabajo:</label>
                                                         <select id="cmbCentroDeCosto" name="cmbCentroDeCosto" class="form-control input-sm "></select>
                                                     </div>
                                                 </div><br>
                                                 <div class="row">
-                                                    <div class="col-md-4">
+                                                    <!--<div class="col-md-4">
                                                         <label>Fecha Inicio de Vacaciones:</label>
                                                         <input type="date" class="form-control input-sm" name="txtFechaDeInicioVacaciones" id="txtFechaDeInicioVacaciones">
                                                     </div>
                                                     <div class="col-md-4">
                                                         <label>Fecha Fin de Vacaciones:</label>
                                                         <input type="date" class="form-control input-sm" name="txtFechaFinDeVacaciones" id="txtFechaFinDeVacaciones">
+                                                    </div>-->
+                                                    <div class="col-md-4">
+                                                        <label>Area de Trabajo:</label>
+                                                        <select id="cmbAreaTrabajo" name="cmbAreaTrabajo" class="form-control input-sm select2"></select>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <label>Cuidad Donde Labora:</label>
-                                                        <select id="cmbCiudadDondeLabora" name="cmbCiudadDondeLabora" class="form-control input-sm"></select>
+                                                        <select id="cmbCiudadDondeLabora" name="cmbCiudadDondeLabora" class="form-control input-sm select2"></select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -238,7 +242,7 @@ include_once '../../Operaciones.php';
                                                 <div class="row">
                                                     <div class="col-md-4">
                                                         <label>Bancos:</label>
-                                                        <select id="cmbBancos" name="cmbBancos" class="form-control input-sm "></select>
+                                                        <select id="cmbBancos" name="cmbBancos" class="form-control input-sm select2"></select>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <label>Tipo de Cuenta:</label>

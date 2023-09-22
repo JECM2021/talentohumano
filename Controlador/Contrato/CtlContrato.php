@@ -62,10 +62,13 @@ switch ($op) {
         asignarContrato();
         break;
     case 19:
-        actualizarContrato();
+        // actualizarContrato();
         break;
     case 20:
         listarTipoAnexo();
+        break;
+    case 21:
+        listarAreaTrabajo();
         break;
 }
 
@@ -349,8 +352,8 @@ function asignarContrato()
     $cajaCompensacion = addslashes(htmlspecialchars($_POST["cmbCajaDeCompensacion"]));
     $fondoCesantias = addslashes(htmlspecialchars($_POST["cmbFondoCesantias"]));
     $centroCosto = addslashes(htmlspecialchars($_POST["cmbCentroDeCosto"]));
-    $fechaInicioVacaciones = addslashes(htmlspecialchars($_POST["txtFechaDeInicioVacaciones"]));
-    $fechaFinVacaciones = addslashes(htmlspecialchars($_POST["txtFechaFinDeVacaciones"]));
+    // $fechaInicioVacaciones = addslashes(htmlspecialchars($_POST["txtFechaDeInicioVacaciones"]));
+    // $fechaFinVacaciones = addslashes(htmlspecialchars($_POST["txtFechaFinDeVacaciones"]));
     $ciudad = addslashes(htmlspecialchars($_POST["cmbCiudadDondeLabora"]));
     $fondoSalud = addslashes(htmlspecialchars($_POST["cmbFondoDeSalud"]));
     $porcentajeSalud = addslashes(htmlspecialchars($_POST["txtPorcentajeSalud"]));
@@ -366,6 +369,7 @@ function asignarContrato()
     $descripcionAnexo = addslashes(htmlspecialchars($_POST["txtDetalle"]));
     $idContrato = addslashes(htmlspecialchars($_POST["txtIdContrato"]));
     $editar = addslashes(htmlspecialchars($_POST["txtEditar"]));
+    $areaTrabajo = addslashes(htmlspecialchars($_POST["cmbAreaTrabajo"]));
     $target_dir = "../../webPage/anexos/";
     $target_file = $target_dir . basename($_FILES["archivo"]["name"]);
     $referer = $_SERVER['HTTP_REFERER'];
@@ -395,8 +399,8 @@ function asignarContrato()
     $ContratoVO->setCajaCompensacion($cajaCompensacion);
     $ContratoVO->setFondoCesantias($fondoCesantias);
     $ContratoVO->setCentroCosto($centroCosto);
-    $ContratoVO->setFechaInicioVacaciones($fechaInicioVacaciones);
-    $ContratoVO->setFechaFinVacaciones($fechaFinVacaciones);
+    //$ContratoVO->setFechaInicioVacaciones($fechaInicioVacaciones);
+    //$ContratoVO->setFechaFinVacaciones($fechaFinVacaciones);
     $ContratoVO->setCiudad($ciudad);
     $ContratoVO->setFondoSalud($fondoSalud);
     $ContratoVO->setPorcentajeSalud($porcentajeSalud);
@@ -408,6 +412,7 @@ function asignarContrato()
     $ContratoVO->setTipoCuentaBanco($tipoCuetaBanco);
     $ContratoVO->setNumeroCuentaBanco($numeroCuentaBanco);
     $ContratoVO->setIdContrato($idContrato);
+    $ContratoVO->setAreaTrabajo($areaTrabajo);
     //die(var_dump($editar));
     $statusJson = array();
     try {
@@ -459,93 +464,6 @@ function asignarContrato()
     }
 }
 
-/*function actualizarContrato()
-{
-    $mdlContrato = new mdlContrato();
-    $idEmpleado = addslashes(htmlspecialchars($_POST["txtIdEmpleado"]));
-    $numContrato = addslashes(htmlspecialchars($_POST["txtNumContrato"]));
-    $tipoContrato = addslashes(htmlspecialchars($_POST["cmbTipoContrato"]));
-    $cargos = addslashes(htmlspecialchars($_POST["cmbTipoCargo"]));
-    $fechaInicioContrato = addslashes(htmlspecialchars($_POST["txtFechaDeInicio"]));
-    $fechaCulminacionContrato = addslashes(htmlspecialchars($_POST["txtFechaDeTerminacion"]));
-    $motivoRetiro = addslashes(htmlspecialchars($_POST["cmbMotivoRetiro"]));
-    $salarioTotal = addslashes(htmlspecialchars($_POST["txtSalarioActual"]));
-    $salarioDia = addslashes(htmlspecialchars($_POST["txtSalarioActualDiario"]));
-    $formaPago = addslashes(htmlspecialchars($_POST["cmbFormaDePago"]));
-    $tipoCotizante = addslashes(htmlspecialchars($_POST["cmbTipoDeCotizante"]));
-    $arl = addslashes(htmlspecialchars($_POST["cmbArl"]));
-    $porcentajeArl = addslashes(htmlspecialchars($_POST["txtPorcentajeArl"]));
-    $cajaCompensacion = addslashes(htmlspecialchars($_POST["cmbCajaDeCompensacion"]));
-    $fondoCesantias = addslashes(htmlspecialchars($_POST["cmbFondoCesantias"]));
-    $centroCosto = addslashes(htmlspecialchars($_POST["cmbCentroDeCosto"]));
-    $fechaInicioVacaciones = addslashes(htmlspecialchars($_POST["txtFechaDeInicioVacaciones"]));
-    $fechaFinVacaciones = addslashes(htmlspecialchars($_POST["txtFechaFinDeVacaciones"]));
-    $ciudad = addslashes(htmlspecialchars($_POST["cmbCiudadDondeLabora"]));
-    $fondoSalud = addslashes(htmlspecialchars($_POST["cmbFondoDeSalud"]));
-    $porcentajeSalud = addslashes(htmlspecialchars($_POST["txtPorcentajeSalud"]));
-    $fechaInicioSalud = addslashes(htmlspecialchars($_POST["txtFechaInicioSalud"]));
-    $fondoPension = addslashes(htmlspecialchars($_POST["cmbFondoDePension"]));
-    $porcentajePension = addslashes(htmlspecialchars($_POST["txtPorcentajePension"]));
-    $fechaInicioPension = addslashes(htmlspecialchars($_POST["txtFechaInicioPension"]));
-    $bancos = addslashes(htmlspecialchars($_POST["cmbBancos"]));
-    $tipoCuetaBanco = addslashes(htmlspecialchars($_POST["cmbTipoCuentaBancaria"]));
-    $numeroCuentaBanco = addslashes(htmlspecialchars($_POST["txtNumCuenta"]));
-    $tipoAnexo = addslashes(htmlspecialchars($_POST["cmbTipoAnexo"]));
-    $nombreAnexo = addslashes(htmlspecialchars($_POST["txtNombreAnexo"]));
-    $descripcionAnexo = addslashes(htmlspecialchars($_POST["txtDetalle"]));
-    $target_dir = "../../webPage/anexos/";
-    $target_file = $target_dir . basename($_FILES["archivo"]["name"]);
-    $referer = $_SERVER['HTTP_REFERER'];
-    if (isset($_FILES["archivo"]["name"])) {
-        $check = getimagesize($_FILES["archivo"]["tmp_name"]);
-        $nombreAnexo = $_FILES['archivo']['name'];
-        $tamano = $_FILES['archivo']['size'];
-        $ruta = $_FILES['archivo']['tmp_name'];
-        $destino = "../../webPage/anexos/" . $nombreAnexo;
-    }
-    $ContratoVO = new ContratoVO();
-    $ContratoVO->setIdEmpleado($idEmpleado);
-    $ContratoVO->setNumContrato($numContrato);
-    $ContratoVO->setTipoContrato($tipoContrato);
-    $ContratoVO->setCargos($cargos);
-    $ContratoVO->setFechaInicioContrato($fechaInicioContrato);
-    $ContratoVO->setFechaCulminacionContrato($fechaCulminacionContrato);
-    $ContratoVO->setMotivoRetiro($motivoRetiro);
-    $ContratoVO->setSalarioTotal($salarioTotal);
-    $ContratoVO->setSalarioDia($salarioDia);
-    $ContratoVO->setFormaPago($formaPago);
-    $ContratoVO->setTipoCotizante($tipoCotizante);
-    $ContratoVO->setArl($arl);
-    $ContratoVO->setPorcentajeArl($porcentajeArl);
-    $ContratoVO->setCajaCompensacion($cajaCompensacion);
-    $ContratoVO->setFondoCesantias($fondoCesantias);
-    $ContratoVO->setCentroCosto($centroCosto);
-    $ContratoVO->setFechaInicioVacaciones($fechaInicioVacaciones);
-    $ContratoVO->setFechaFinVacaciones($fechaFinVacaciones);
-    $ContratoVO->setCiudad($ciudad);
-    $ContratoVO->setFondoSalud($fondoSalud);
-    $ContratoVO->setPorcentajeSalud($porcentajeSalud);
-    $ContratoVO->setFechaInicioSalud($fechaInicioSalud);
-    $ContratoVO->setFondoPension($fondoPension);
-    $ContratoVO->setPorcentajePension($porcentajePension);
-    $ContratoVO->setFechaInicioPension($fechaInicioPension);
-    $ContratoVO->setBancos($bancos);
-    $ContratoVO->setTipoCuentaBanco($tipoCuetaBanco);
-    $ContratoVO->setNumeroCuentaBanco($numeroCuentaBanco);
-    $statusJson = array();
-    try {
-        $actualizarContrato = $mdlContrato->actualizarContrato($ContratoVO, $nombreAnexo, $descripcionAnexo, $tamano, $destino, $tipoAnexo);
-        if ($actualizarContrato > 0) {
-            $statusJson["success"] = "<span>contrato actualizado correctamente.</span>";
-        } else {
-            $statusJson["error"] = "<span>Error al intentar ejecutar la peticion.</span>";
-        }
-        echo '<script>alert("Contrato Actualizado Correctamente");  window.history.back();</script>';
-        // echo json_encode($statusJson);
-    } catch (Exception $exc) {
-        echo $exc->getTraceAsString();
-    }
-}*/
 
 function listarTipoAnexo()
 {
@@ -555,6 +473,23 @@ function listarTipoAnexo()
         //die(var_dump($listarTipoDocumento));
         if ($listarTipoAnexo !== null) {
             $json = json_encode($listarTipoAnexo);
+            echo $json;
+        } else {
+            echo "Lita vacia.";
+        }
+    } catch (Exception $exc) {
+        echo $exc->getTraceAsString();
+    }
+}
+
+function listarAreaTrabajo()
+{
+    $mdlContrato = new mdlContrato();
+    try {
+        $listarAreaTrabajo = $mdlContrato->listarAreaTrabajo();
+        //die(var_dump($listarTipoDocumento));
+        if ($listarAreaTrabajo !== null) {
+            $json = json_encode($listarAreaTrabajo);
             echo $json;
         } else {
             echo "Lita vacia.";

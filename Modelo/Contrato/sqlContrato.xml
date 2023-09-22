@@ -191,8 +191,7 @@
             PARAF_ID,
             CESAN_ID,
             CTDC_ID,
-            CTRA_FECHA_INICIO_VACACIONES,
-            CTRA_FECHA_FIN_VACACIONES,
+            ADT_ID,
             CIU_ID,
             FONDO_SALUD,
             PORC_SALUD,
@@ -205,7 +204,7 @@
             CTRA_NUM_CUENTA
             )
             VALUES
-            (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+            (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
         </sql>
     </ASIGNAR_CONTRATO>
     <ASIGNAR_ANEXO>
@@ -231,8 +230,7 @@
             PARAF_ID = ?,
             CESAN_ID = ?,
             CTDC_ID = ?,
-            CTRA_FECHA_INICIO_VACACIONES = ?,
-            CTRA_FECHA_FIN_VACACIONES = ?,
+            ADT_ID = ?,
             CIU_ID = ?,
             FONDO_SALUD = ?,
             PORC_SALUD = ?,
@@ -257,4 +255,13 @@
         WHERE TANX_ESTADO = 'A'
         </sql>
     </LISTAR_TIPO_ANEXO>
+    <LISTAR_AREA_TRABAJO>
+        <sql>
+            SELECT
+            ADT_ID AS ID,
+            ADT_DESCRIPCION AS DESCRIPCION	
+            FROM
+            AREA_TRABAJO
+        </sql>
+    </LISTAR_AREA_TRABAJO>
 </root>
