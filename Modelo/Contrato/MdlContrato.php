@@ -37,8 +37,6 @@ class mdlContrato extends Conexion
                     "PARAFISCAL_ID" => $row['PARAFISCAL_ID'],
                     "CESANTIAS_ID" => $row['CESANTIAS_ID'],
                     "CENTRO_COSTO" => $row['CENTRO_COSTO'],
-                    "FECHA_INICIO_VACACIONES" => $row['FECHA_INICIO_VACACIONES'],
-                    "FECHA_FIN_VACACIONES" => $row['FECHA_FIN_VACACIONES'],
                     "CIUDAD" => $row['CIUDAD'],
                     "FONDO_SALUD" => $row['FONDO_SALUD'],
                     "POCENTAJE_SALUD" => $row['POCENTAJE_SALUD'],
@@ -49,7 +47,8 @@ class mdlContrato extends Conexion
                     "BANCO_ID" => $row['BANCO_ID'],
                     "TIPO_CUENTA_BANCARIA" => $row['TIPO_CUENTA_BANCARIA'],
                     "NUM_CUENTA" => $row['NUM_CUENTA'],
-                    "CONTRATO_ID" => $row['CONTRATO_ID']
+                    "CONTRATO_ID" => $row['CONTRATO_ID'],
+                    "AREA_TRABAJO_ID" => $row['AREA_TRABAJO_ID']
                 );
             }
         } catch (Exception $exc) {

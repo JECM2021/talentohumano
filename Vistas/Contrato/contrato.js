@@ -136,8 +136,8 @@ function obtenerDatosEmpleados(index) {
     var cajaCompensacion = listadoEmpleados[index].PARAFISCAL_ID;
     var fondoCesantias = listadoEmpleados[index].CESANTIAS_ID;
     var centroCosto = listadoEmpleados[index].CENTRO_COSTO;
-    var fechaInicioVacaciones = listadoEmpleados[index].FECHA_INICIO_VACACIONES;
-    var fechaFinVacaciones = listadoEmpleados[index].FECHA_FIN_VACACIONES;
+    //var fechaInicioVacaciones = listadoEmpleados[index].FECHA_INICIO_VACACIONES;
+    //var fechaFinVacaciones = listadoEmpleados[index].FECHA_FIN_VACACIONES;
     var ciudadLabora = listadoEmpleados[index].CIUDAD;
     var fondoSalud = listadoEmpleados[index].FONDO_SALUD;
     var porcSalud = listadoEmpleados[index].POCENTAJE_SALUD;
@@ -151,6 +151,7 @@ function obtenerDatosEmpleados(index) {
     var salarioDia = listadoEmpleados[index].SALARIO_DIA;
     var porcArl = listadoEmpleados[index].POCENTAJE_ARL;
     var contratoId = listadoEmpleados[index].CONTRATO_ID;
+    var areaTrabajo = listadoEmpleados[index].AREA_TRABAJO_ID;
 
     $("#mdlEmpleados").modal("hide");
     $("#txtNombreEmpleado").val(nombreyapellido);
@@ -171,8 +172,8 @@ function obtenerDatosEmpleados(index) {
     $("#cmbCajaDeCompensacion").val(cajaCompensacion);
     $("#cmbFondoCesantias").val(fondoCesantias);
     $("#cmbCentroDeCosto").val(centroCosto);
-    $("#txtFechaDeInicioVacaciones").val(fechaInicioVacaciones);
-    $("#txtFechaFinDeVacaciones").val(fechaFinVacaciones);
+    //$("#txtFechaDeInicioVacaciones").val(fechaInicioVacaciones);
+    //$("#txtFechaFinDeVacaciones").val(fechaFinVacaciones);
     $("#cmbCiudadDondeLabora").val(ciudadLabora);
     $("#cmbFondoDeSalud").val(fondoSalud);
     $("#txtPorcentajeSalud").val(porcSalud);
@@ -180,12 +181,13 @@ function obtenerDatosEmpleados(index) {
     $("#cmbFondoDePension").val(fondoPension);
     $("#txtPorcentajePension").val(porcPension);
     $("#txtFechaInicioPension").val(fechaInicioPension);
-    $("#cmbBancos").val(bancos);
-    $("#cmbTipoCuentaBancaria").val(tipoCuenta);
+    $("#cmbBancos").val(bancos).change();
+    $("#cmbTipoCuentaBancaria").val(tipoCuenta).change();
     $("#txtNumCuenta").val(numCuentaBanco)
     $("#txtPorcentajeArl").val(porcArl);
     $("#txtSalarioActualDiario").val(salarioDia);
     $("#txtIdContrato").val(contratoId);
+    $("#cmbAreaTrabajo").val(areaTrabajo);
     if (contratoId > 0) {
         $("#txtEditar").val(1);
         $("#btnGuardar").text("Actualizar");
