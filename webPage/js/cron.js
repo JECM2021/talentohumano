@@ -14,14 +14,13 @@ function contratosvencer() {
         success: function(data) {
             var ret = eval('(' + data + ')');
             try {
+                // debugger;
                 if (ret != 0) {
                     listarCombo = $("#contvencer1");
                     listarCombo.html('');
                     for (var i = 0; i < ret.length; i++) {
-                        if (ret[i].DIAS_RESTANTES <= 30) {
+                        if (ret[i].DIAS_RESTANTES <= 40) {
                             $("#pokeList ul").append("<li>" + ret[i].EMPLEADO + " - " + ret[i].CARGO + " - " + ret[i].FECHA_CULMINACION + " </li>");
-                        } else {
-
                         }
                     }
                     setTimeout(function() {
@@ -29,7 +28,7 @@ function contratosvencer() {
                     }, 5000);
 
                 } else {
-                    $(".adbn-wrap").fadeOut(1);
+                    $(".adbn-wrap").fadeOut(0);
                 }
             } catch (e) {}
         },
