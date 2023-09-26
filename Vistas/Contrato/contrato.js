@@ -161,7 +161,7 @@ function obtenerDatosEmpleados(index) {
     $("#txtIdEmpleado").val(idEmpleado);
     $("#txtNumContrato").val(numcontrato);
     $("#cmbTipoContrato").val(tipoContrato);
-    $("#cmbTipoCargo").val(cargo);
+    $("#cmbTipoCargo").val(cargo).change();
     $("#txtFechaDeInicio").val(fechaInicio);
     $("#txtFechaDeTerminacion").val(fechaCulminacion);
     $("#cmbMotivoRetiro").val(motivoRetiro);

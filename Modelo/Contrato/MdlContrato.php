@@ -546,12 +546,14 @@ class mdlContrato extends Conexion
                 $motivoRetiro = null;
             }
             $respuesta = $conexion->prepare($this->getSql("ACTUALIZAR_CONTRATO", self::RUTA_SQL));
-            $respuesta->bind_param('ssssssssssssssssssssssssssss', $numContrato, $tipoContrato, $cargos, $fechaInicioContrato, $fechaCulminacionContrato, $motivoRetiro, $salarioTotal, $salarioDia, $formaPago, $tipoCotizante, $arl, $porcentajeArl, $cajaCompensacion, $fondoCesantias, $centroCosto, $areaTrabajo, $ciudad, $fondoSalud, $porcentajeSalud, $fechaInicioSalud, $fondoPension, $porcentajePension, $fechaInicioPension, $bancos, $tipoCuetaBanco, $numeroCuentaBanco, $idEmpleado);
+            $respuesta->bind_param('sssssssssssssssssssssssssss', $numContrato, $tipoContrato, $cargos, $fechaInicioContrato, $fechaCulminacionContrato, $motivoRetiro, $salarioTotal, $salarioDia, $formaPago, $tipoCotizante, $arl, $porcentajeArl, $cajaCompensacion, $fondoCesantias, $centroCosto, $areaTrabajo, $ciudad, $fondoSalud, $porcentajeSalud, $fechaInicioSalud, $fondoPension, $porcentajePension, $fechaInicioPension, $bancos, $tipoCuetaBanco, $numeroCuentaBanco, $idEmpleado);
             $filasAfectadas = $respuesta->execute() or dir($respuesta->error);
             if ($filasAfectadas > 0) {
-                $respuesta = $conexion->prepare($this->getSql("ASIGNAR_ANEXO", self::RUTA_SQL));
-                $respuesta->bind_param('sssssss', $nombreAnexo, $descripcionAnexo, $tamano, $destino, $tipoAnexo, $idContrato, $idEmpleado);
-                $filasAfectadas = $respuesta->execute();
+                if (!empty($nombreAnexo)) {
+                    $respuesta = $conexion->prepare($this->getSql("ASIGNAR_ANEXO", self::RUTA_SQL));
+                    $respuesta->bind_param('sssssss', $nombreAnexo, $descripcionAnexo, $tamano, $destino, $tipoAnexo, $idContrato, $idEmpleado);
+                    $filasAfectadas = $respuesta->execute();
+                }
             }
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
