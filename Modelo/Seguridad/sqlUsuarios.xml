@@ -1,7 +1,7 @@
 <root>
     <LISTAR_COMBO_PERFILES>
         <sql>
-            SELECT per_id AS ID, perfil.per_nombre AS NOMBRE  FROM configuraciones.perfil WHERE perfil.per_estado ='A';         
+            SELECT per_id AS ID, perfil.per_nombre AS NOMBRE  FROM configuracionesnom.perfil WHERE perfil.per_estado ='A';         
         </sql>
     </LISTAR_COMBO_PERFILES>
     
