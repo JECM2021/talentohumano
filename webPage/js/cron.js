@@ -14,6 +14,7 @@ function contratosvencer() {
         success: function(data) {
             var ret = eval('(' + data + ')');
             try {
+                console.log(ret, ret.length);
                 if (ret != 0) {
                     listarCombo = $("#contvencer1");
                     listarCombo.html('');
@@ -33,7 +34,9 @@ function contratosvencer() {
                 } else {
                     $(".adbn-wrap").fadeOut(0);
                 }
-            } catch (e) {}
+            } catch (e) {
+                alertify.error(" El erro es:" + e);
+            }
         },
         error: function(objeto, error, error2) {
             alertify.alert(error);

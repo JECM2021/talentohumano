@@ -11,7 +11,6 @@ include_once './validaSession.php';
   <script>
     var CONTROLLERPUBLIC = "./Controlador/CtlOperacionesPublics.php";
   </script>
-  <script src="./webPage/js/cron.js?v=<?php echo (rand()); ?>"></script>
   <style>
     .adbn-wrap {
       display: none;
