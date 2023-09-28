@@ -14,12 +14,15 @@ function contratosvencer() {
         success: function(data) {
             var ret = eval('(' + data + ')');
             try {
-                // debugger;
                 if (ret != 0) {
                     listarCombo = $("#contvencer1");
                     listarCombo.html('');
                     for (var i = 0; i < ret.length; i++) {
-                        if (ret[i].DIAS_RESTANTES <= 40) {
+                        if (ret[i].DIAS_RESTANTES <= 40 && ret[i].DIAS_RESTANTES >= 1) {
+                            $("#mensajes").text("Contratos Proximos a Vencer")
+                            $("#pokeList ul").append("<li>" + ret[i].EMPLEADO + " - " + ret[i].CARGO + " - " + ret[i].FECHA_CULMINACION + " </li>");
+                        } else if (ret[i].DIAS_RESTANTES <= 0) {
+                            $("#mensajes").text("Contratos Vencidos")
                             $("#pokeList ul").append("<li>" + ret[i].EMPLEADO + " - " + ret[i].CARGO + " - " + ret[i].FECHA_CULMINACION + " </li>");
                         }
                     }

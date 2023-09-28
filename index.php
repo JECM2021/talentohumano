@@ -69,9 +69,9 @@ include_once './validaSession.php';
         </div>
       </section>
     </div>
-    <div class="adbn-wrap" style="display: flex;">
+    <div id="cabecera_uno" class="adbn-wrap" style="display: flex;">
       <div id="pokeList">
-        <h2 style="text-align: center;">Empleados Proximos a vencer contrato</h2><br><br>
+        <h2 id="mensajes" style="text-align: center; "></h2><br><br>
         <ul>
         </ul>
       </div>

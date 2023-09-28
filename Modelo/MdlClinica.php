@@ -425,7 +425,7 @@ class MdlClinica extends Conexion
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
-        // die(var_dump($rawdata));
+        //die(var_dump($rawdata));
         return $rawdata;
     }
 }
