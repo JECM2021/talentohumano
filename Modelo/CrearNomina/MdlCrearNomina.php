@@ -130,7 +130,7 @@ class mdlCrearNomina extends Conexion
             //die(var_dump($idNomina));
             if ($filasAfectadas > 0) {
                 $respuesta = $conexion->prepare($this->getSql("NOMINA_DETALLE", self::RUTA_SQL));
-                die(var_dump($listadoNomina));
+                //die(var_dump($listadoNomina));
                 foreach ($listadoNomina as $listNom) {
                     $idEmpleado = $listNom->idEmpleado;
                     $totalNovedad = $listNom->totalNovedad;

@@ -81,7 +81,6 @@ include_once '../../Operaciones.php';
                         <!--DATOS DEL CONTRATO-->
                         <div class="contect2">
                             <div class="row">
-
                                 <!-------------------------------------------------------------------------------------------->
                                 <div class="col-md-12">
                                     <div class="panel panel-default">
