@@ -21,7 +21,7 @@
                                           <th class='center'>DOCUMENTO </th>
                                           <th class='center'>NOMBRES Y APELLIDOS</th>
                                           <th class="center">NUMERO DE CONTRATO</th>
-                                          <th class='center'>CENTRO DE COSTO</th>
+                                          <th class='center'>CENTRO DE TRABAJO</th>
                                       </tr>
                                   </thead>
                                   <tbody id="tbodyPacientes" style="cursor: pointer"></tbody>

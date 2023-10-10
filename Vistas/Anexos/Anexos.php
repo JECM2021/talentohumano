@@ -56,7 +56,7 @@ include_once '../../Operaciones.php';
                                         <input type="text" name="txtNombrePacienteAnexo" id="txtNombrePacienteAnexo" class="form-control input-sm" disabled="">
                                     </div>
                                     <div class="col-md-3">
-                                        <strong><label>Centro de Costo</label></strong>
+                                        <strong><label>Numero de Contrato</label></strong>
                                         <input type="text" name="txtNumEvento" id="txtNumEvento" class="form-control input-sm" disabled="">
                                         <input type="hidden" name="txtNumId" id="txtNumId" class="form-control input-sm" disabled="">
                                     </div>
