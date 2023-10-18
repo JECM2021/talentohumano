@@ -86,13 +86,9 @@ include_once '../../Operaciones.php';
                                 </div>
                             </div>
                         </div>
-
-
-
-
                     </div>
                 </div>
-            </section>
+            </section><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
             <script>
                 // $(document).ready(function() {
                 //   visualizarPacienteAnexo();
