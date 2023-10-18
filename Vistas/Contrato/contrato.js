@@ -136,8 +136,6 @@ function obtenerDatosEmpleados(index) {
     var cajaCompensacion = listadoEmpleados[index].PARAFISCAL_ID;
     var fondoCesantias = listadoEmpleados[index].CESANTIAS_ID;
     var centroCosto = listadoEmpleados[index].CENTRO_COSTO;
-    //var fechaInicioVacaciones = listadoEmpleados[index].FECHA_INICIO_VACACIONES;
-    //var fechaFinVacaciones = listadoEmpleados[index].FECHA_FIN_VACACIONES;
     var ciudadLabora = listadoEmpleados[index].CIUDAD;
     var fondoSalud = listadoEmpleados[index].FONDO_SALUD;
     var porcSalud = listadoEmpleados[index].POCENTAJE_SALUD;
@@ -172,9 +170,7 @@ function obtenerDatosEmpleados(index) {
     $("#cmbCajaDeCompensacion").val(cajaCompensacion);
     $("#cmbFondoCesantias").val(fondoCesantias);
     $("#cmbCentroDeCosto").val(centroCosto);
-    //$("#txtFechaDeInicioVacaciones").val(fechaInicioVacaciones);
-    //$("#txtFechaFinDeVacaciones").val(fechaFinVacaciones);
-    $("#cmbCiudadDondeLabora").val(ciudadLabora);
+    $("#cmbCiudadDondeLabora").val(ciudadLabora).change();
     $("#cmbFondoDeSalud").val(fondoSalud);
     $("#txtPorcentajeSalud").val(porcSalud);
     $("#txtFechaInicioSalud").val(fechaInicioSalud);
@@ -187,7 +183,7 @@ function obtenerDatosEmpleados(index) {
     $("#txtPorcentajeArl").val(porcArl);
     $("#txtSalarioActualDiario").val(salarioDia);
     $("#txtIdContrato").val(contratoId);
-    $("#cmbAreaTrabajo").val(areaTrabajo);
+    $("#cmbAreaTrabajo").val(areaTrabajo).change();
     if (contratoId > 0) {
         $("#txtEditar").val(1);
         $("#btnGuardar").text("Actualizar");
@@ -613,8 +609,6 @@ function validarContrato() {
     var cajaCompensacion = $("#cmbCajaDeCompensacion").val();
     var fondoCesantias = $("#cmbFondoCesantias").val();
     var centroCosto = $("#cmbCentroDeCosto").val();
-    // var fechaInicioVacaciones = $("#txtFechaDeInicioVacaciones").val();
-    // var fechaFinVacaciones = $("#txtFechaFinDeVacaciones").val();
     var ciudad = $("#cmbCiudadDondeLabora").val();
     var fondoSalud = $("#cmbFondoDeSalud").val();
     var porcentajeSalud = $("#txtPorcentajeSalud").val();
@@ -625,13 +619,9 @@ function validarContrato() {
     var bancos = $("#cmbBancos").val();
     var tipoCuetaBanco = $("#cmbTipoCuentaBancaria").val();
     var numeroCuentaBanco = $("#txtNumCuenta").val();
-    var tipoAnexo = $("#cmbTipoAnexo").val();
-    var anexoDocumento = $("#archivo").val();
-    var nombreAnexo = $("#txtNombreAnexo").val();
-    var descripcionAnexo = $("#txtDetalle").val();
     var areaTrabajo = $("#cmbAreaTrabajo").val();
     var editar = $("#txtEditar").val();
-    //console.log(editar);
+
     if (idEmpleado.length === 0) {
         alertify.alert('Mensaje', 'Por favor seleccione un empleado');
     } else if (numContrato.length === 0) {
@@ -673,23 +663,19 @@ function validarContrato() {
     } else if (tipoCuetaBanco.length === 0) {
         alertify.alert('Mensaje', 'Por favor seleccione un tipo de cuenta bancaria');
     } else if (numeroCuentaBanco.length === 0) {
-        alertify.alert('Mensaje', 'Por favor seleccione un numerode cuenta bancaria');
+        alertify.alert('Mensaje', 'Por favor seleccione un numero de cuenta bancaria');
     } else {
-        /*asignarContrato(idEmpleado, numContrato, tipoContrato, cargos, fechaInicioContrato, fechaCulminacionContrato, motivoRetiro, salarioTotal, salarioDia, formaPago, tipoCotizante, arl, porcentajeArl,
-            cajaCompensacion, fondoCesantias, centroCosto, fechaInicioVacaciones, fechaFinVacaciones, ciudad, fondoSalud, porcentajeSalud, fechaInicioSalud, fondoPension, porcentajePension, fechaInicioPension,
-            bancos, tipoCuetaBanco, numeroCuentaBanco, tipoAnexo, anexoDocumento, nombreAnexo, descripcionAnexo);*/
-        $("#frmAnexos").submit();
-        limpiarCampos();
+        asignarContrato(idEmpleado, numContrato, tipoContrato, cargos, fechaInicioContrato, fechaCulminacionContrato, motivoRetiro, salarioTotal, salarioDia, formaPago, tipoCotizante, arl, porcentajeArl,
+            cajaCompensacion, fondoCesantias, centroCosto, ciudad, fondoSalud, porcentajeSalud, fechaInicioSalud, fondoPension, porcentajePension, fechaInicioPension,
+            bancos, tipoCuetaBanco, numeroCuentaBanco, areaTrabajo, editar);
     }
 }
 
-/*function asignarContrato(idEmpleado, numContrato, tipoContrato, cargos, fechaInicioContrato, fechaCulminacionContrato, motivoRetiro, salarioTotal, salarioDia, formaPago, tipoCotizante, arl, porcentajeArl,
-    cajaCompensacion, fondoCesantias, centroCosto, fechaInicioVacaciones, fechaFinVacaciones, ciudad, fondoSalud, porcentajeSalud, fechaInicioSalud, fondoPension, porcentajePension, fechaInicioPension, bancos,
-    tipoCuetaBanco, numeroCuentaBanco, tipoAnexo, anexoDocumento, nombreAnexo, descripcionAnexo) {
-
+function asignarContrato(idEmpleado, numContrato, tipoContrato, cargos, fechaInicioContrato, fechaCulminacionContrato, motivoRetiro, salarioTotal, salarioDia, formaPago, tipoCotizante, arl, porcentajeArl,
+    cajaCompensacion, fondoCesantias, centroCosto, ciudad, fondoSalud, porcentajeSalud, fechaInicioSalud, fondoPension, porcentajePension, fechaInicioPension, bancos,
+    tipoCuetaBanco, numeroCuentaBanco, areaTrabajo, editar) {
     var ur = CONTROLLERCONTRATO;
     var op = 18;
-
     $.ajax({
         type: "POST",
         url: ur,
@@ -711,8 +697,6 @@ function validarContrato() {
             cajaCompensacion: cajaCompensacion,
             fondoCesantias: fondoCesantias,
             centroCosto: centroCosto,
-            fechaInicioVacaciones: fechaInicioVacaciones,
-            fechaFinVacaciones: fechaFinVacaciones,
             ciudad: ciudad,
             fondoSalud: fondoSalud,
             porcentajeSalud: porcentajeSalud,
@@ -723,15 +707,14 @@ function validarContrato() {
             bancos: bancos,
             tipoCuetaBanco: tipoCuetaBanco,
             numeroCuentaBanco: numeroCuentaBanco,
-            tipoAnexo: tipoAnexo,
-            anexoDocumento: anexoDocumento,
-            nombreAnexo: nombreAnexo,
-            descripcionAnexo: descripcionAnexo
+            areaTrabajo: areaTrabajo,
+            editar: editar
         }),
         success: function(data) {
             var ret = eval('(' + data + ')');
             if (ret.hasOwnProperty("success")) {
                 limpiarCampos();
+                visualizarEmpleados();
                 alertify.success(ret.success);
             } else if (ret.hasOwnProperty("error")) {
                 alertify.alert('Mensaje', ret.error);
@@ -741,10 +724,42 @@ function validarContrato() {
             alertify.alert(error);
         }
     });
-}*/
+}
 
 function limpiarCampos() {
-    $("#frmAnexos")[0].reset();
+    $("#txtIdEmpleado").val('');
+    $("#txtNumContrato").val('');
+    $("#cmbTipoContrato").val('');
+    $("#cmbTipoCargo").val('').change();
+    $("#txtFechaDeInicio").val('');
+    $("#txtFechaDeTerminacion").val('');
+    $("#cmbMotivoRetiro").val('');
+    $("#txtSalarioActual").val('');
+    $("#txtSalarioActualDiario").val('');
+    $("#cmbFormaDePago").val('');
+    $("#cmbTipoDeCotizante").val('');
+    $("#cmbArl").val('');
+    $("#txtPorcentajeArl").val('');
+    $("#cmbCajaDeCompensacion").val('');
+    $("#cmbFondoCesantias").val('');
+    $("#cmbCentroDeCosto").val('');
+    $("#cmbCiudadDondeLabora").val('').change();
+    $("#cmbFondoDeSalud").val('');
+    $("#txtPorcentajeSalud").val('');
+    $("#txtFechaInicioSalud").val('');
+    $("#cmbFondoDePension").val('');
+    $("#txtPorcentajePension").val('');
+    $("#txtFechaInicioPension").val('');
+    $("#cmbBancos").val('').change();
+    $("#cmbTipoCuentaBancaria").val('');
+    $("#txtNumCuenta").val('');
+    $("#cmbAreaTrabajo").val('').change();
+    $("#txtEditar").val('');
+    $("#txtNombreEmpleado").val('');
+    $("#cmbTipoDocumento").val('');
+    $("#txtNumDocumento").val('');
+    $("#cmbEstadoEmpleado").val('');
+    $("#btnGuardar").text("Guardar");
 }
 
 

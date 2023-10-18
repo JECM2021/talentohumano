@@ -206,11 +206,6 @@
             (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
         </sql>
     </ASIGNAR_CONTRATO>
-    <ASIGNAR_ANEXO>
-        <sql>
-            INSERT INTO ANEXOS ( ANX_NOMBRE, ANX_DESCRIPCION, ANX_TAMANO, ANX_RUTA, TANX_ID, CTRA_ID, EMPL_ID )VALUES(?,?,?,?,?,?,?);
-        </sql>
-    </ASIGNAR_ANEXO>
     <ACTUALIZAR_CONTRATO>
         <sql>
             UPDATE CONTRATO SET 

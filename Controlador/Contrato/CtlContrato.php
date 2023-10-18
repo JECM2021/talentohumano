@@ -334,54 +334,36 @@ function listarCentroDeCosto()
 
 function asignarContrato()
 {
-    //die(var_dump($_POST));
     $mdlContrato = new mdlContrato();
-    $idEmpleado = addslashes(htmlspecialchars($_POST["txtIdEmpleado"]));
-    $numContrato = addslashes(htmlspecialchars($_POST["txtNumContrato"]));
-    $tipoContrato = addslashes(htmlspecialchars($_POST["cmbTipoContrato"]));
-    $cargos = addslashes(htmlspecialchars($_POST["cmbTipoCargo"]));
-    $fechaInicioContrato = addslashes(htmlspecialchars($_POST["txtFechaDeInicio"]));
-    $fechaCulminacionContrato = addslashes(htmlspecialchars($_POST["txtFechaDeTerminacion"]));
-    $motivoRetiro = addslashes(htmlspecialchars($_POST["cmbMotivoRetiro"]));
-    $salarioTotal = addslashes(htmlspecialchars($_POST["txtSalarioActual"]));
-    $salarioDia = addslashes(htmlspecialchars($_POST["txtSalarioActualDiario"]));
-    $formaPago = addslashes(htmlspecialchars($_POST["cmbFormaDePago"]));
-    $tipoCotizante = addslashes(htmlspecialchars($_POST["cmbTipoDeCotizante"]));
-    $arl = addslashes(htmlspecialchars($_POST["cmbArl"]));
-    $porcentajeArl = addslashes(htmlspecialchars($_POST["txtPorcentajeArl"]));
-    $cajaCompensacion = addslashes(htmlspecialchars($_POST["cmbCajaDeCompensacion"]));
-    $fondoCesantias = addslashes(htmlspecialchars($_POST["cmbFondoCesantias"]));
-    $centroCosto = addslashes(htmlspecialchars($_POST["cmbCentroDeCosto"]));
-    // $fechaInicioVacaciones = addslashes(htmlspecialchars($_POST["txtFechaDeInicioVacaciones"]));
-    // $fechaFinVacaciones = addslashes(htmlspecialchars($_POST["txtFechaFinDeVacaciones"]));
-    $ciudad = addslashes(htmlspecialchars($_POST["cmbCiudadDondeLabora"]));
-    $fondoSalud = addslashes(htmlspecialchars($_POST["cmbFondoDeSalud"]));
-    $porcentajeSalud = addslashes(htmlspecialchars($_POST["txtPorcentajeSalud"]));
-    $fechaInicioSalud = addslashes(htmlspecialchars($_POST["txtFechaInicioSalud"]));
-    $fondoPension = addslashes(htmlspecialchars($_POST["cmbFondoDePension"]));
-    $porcentajePension = addslashes(htmlspecialchars($_POST["txtPorcentajePension"]));
-    $fechaInicioPension = addslashes(htmlspecialchars($_POST["txtFechaInicioPension"]));
-    $bancos = addslashes(htmlspecialchars($_POST["cmbBancos"]));
-    $tipoCuetaBanco = addslashes(htmlspecialchars($_POST["cmbTipoCuentaBancaria"]));
-    $numeroCuentaBanco = addslashes(htmlspecialchars($_POST["txtNumCuenta"]));
-    $tipoAnexo = addslashes(htmlspecialchars($_POST["cmbTipoAnexo"]));
-    $nombreAnexo = addslashes(htmlspecialchars($_POST["txtNombreAnexo"]));
-    $descripcionAnexo = addslashes(htmlspecialchars($_POST["txtDetalle"]));
-    $idContrato = addslashes(htmlspecialchars($_POST["txtIdContrato"]));
-    $editar = addslashes(htmlspecialchars($_POST["txtEditar"]));
-    $areaTrabajo = addslashes(htmlspecialchars($_POST["cmbAreaTrabajo"]));
-    $target_dir = "../../webPage/anexos/";
-    $target_file = $target_dir . basename($_FILES["archivo"]["name"]);
-    $referer = $_SERVER['HTTP_REFERER'];
-    if (!empty($_FILES["archivo"]["name"])) {
-        $check = getimagesize($_FILES["archivo"]["tmp_name"]);
-        $nombreAnexo = $_FILES['archivo']['name'];
-        $tamano = $_FILES['archivo']['size'];
-        $ruta = $_FILES['archivo']['tmp_name'];
-        $destino = "../../webPage/anexos/" . $nombreAnexo;
-        echo "ingreso";
-    }
-    //die(var_dump($_FILES["archivo"], "fdf"));
+    $idEmpleado = addslashes(htmlspecialchars($_POST["idEmpleado"]));
+    $numContrato = addslashes(htmlspecialchars($_POST["numContrato"]));
+    $tipoContrato = addslashes(htmlspecialchars($_POST["tipoContrato"]));
+    $cargos = addslashes(htmlspecialchars($_POST["cargos"]));
+    $fechaInicioContrato = addslashes(htmlspecialchars($_POST["fechaInicioContrato"]));
+    $fechaCulminacionContrato = addslashes(htmlspecialchars($_POST["fechaCulminacionContrato"]));
+    $motivoRetiro = addslashes(htmlspecialchars($_POST["motivoRetiro"]));
+    $salarioTotal = addslashes(htmlspecialchars($_POST["salarioTotal"]));
+    $salarioDia = addslashes(htmlspecialchars($_POST["salarioDia"]));
+    $formaPago = addslashes(htmlspecialchars($_POST["formaPago"]));
+    $tipoCotizante = addslashes(htmlspecialchars($_POST["tipoCotizante"]));
+    $arl = addslashes(htmlspecialchars($_POST["arl"]));
+    $porcentajeArl = addslashes(htmlspecialchars($_POST["porcentajeArl"]));
+    $cajaCompensacion = addslashes(htmlspecialchars($_POST["cajaCompensacion"]));
+    $fondoCesantias = addslashes(htmlspecialchars($_POST["fondoCesantias"]));
+    $centroCosto = addslashes(htmlspecialchars($_POST["centroCosto"]));
+    $ciudad = addslashes(htmlspecialchars($_POST["ciudad"]));
+    $fondoSalud = addslashes(htmlspecialchars($_POST["fondoSalud"]));
+    $porcentajeSalud = addslashes(htmlspecialchars($_POST["porcentajeSalud"]));
+    $fechaInicioSalud = addslashes(htmlspecialchars($_POST["fechaInicioSalud"]));
+    $fondoPension = addslashes(htmlspecialchars($_POST["fondoPension"]));
+    $porcentajePension = addslashes(htmlspecialchars($_POST["porcentajePension"]));
+    $fechaInicioPension = addslashes(htmlspecialchars($_POST["fechaInicioPension"]));
+    $bancos = addslashes(htmlspecialchars($_POST["bancos"]));
+    $tipoCuetaBanco = addslashes(htmlspecialchars($_POST["tipoCuetaBanco"]));
+    $numeroCuentaBanco = addslashes(htmlspecialchars($_POST["numeroCuentaBanco"]));
+    $editar = addslashes(htmlspecialchars($_POST["editar"]));
+    $areaTrabajo = addslashes(htmlspecialchars($_POST["areaTrabajo"]));
+
     $ContratoVO = new ContratoVO();
     $ContratoVO->setIdEmpleado($idEmpleado);
     $ContratoVO->setNumContrato($numContrato);
@@ -399,8 +381,6 @@ function asignarContrato()
     $ContratoVO->setCajaCompensacion($cajaCompensacion);
     $ContratoVO->setFondoCesantias($fondoCesantias);
     $ContratoVO->setCentroCosto($centroCosto);
-    //$ContratoVO->setFechaInicioVacaciones($fechaInicioVacaciones);
-    //$ContratoVO->setFechaFinVacaciones($fechaFinVacaciones);
     $ContratoVO->setCiudad($ciudad);
     $ContratoVO->setFondoSalud($fondoSalud);
     $ContratoVO->setPorcentajeSalud($porcentajeSalud);
@@ -411,54 +391,23 @@ function asignarContrato()
     $ContratoVO->setBancos($bancos);
     $ContratoVO->setTipoCuentaBanco($tipoCuetaBanco);
     $ContratoVO->setNumeroCuentaBanco($numeroCuentaBanco);
-    $ContratoVO->setIdContrato($idContrato);
     $ContratoVO->setAreaTrabajo($areaTrabajo);
-    //die(var_dump($editar));
     $statusJson = array();
     try {
         if ($editar == 1) {
-            if (copy($ruta, $destino)) {
-                $actualizarContrato = $mdlContrato->actualizarContrato($ContratoVO, $nombreAnexo, $descripcionAnexo, $tamano, $destino, $tipoAnexo);
-                if ($actualizarContrato > 0) {
-                    $statusJson["success"] = "<span>contrato actualizado correctamente.</span>";
-                } else {
-                    $statusJson["error"] = "<span>Error al intentar ejecutar la peticion.</span>";
-                }
-                echo '<script>alert("Contrato Actualizado Correctamente");  window.history.back();</script>';
-                // echo json_encode($statusJson);
-            } else {
-                $actualizarContrato = $mdlContrato->actualizarContrato($ContratoVO, $nombreAnexo, $descripcionAnexo, $tamano, $destino, $tipoAnexo);
-                if ($actualizarContrato > 0) {
-                    $statusJson["success"] = "<span>contrato actualizado correctamente.</span>";
-                } else {
-                    $statusJson["error"] = "<span>Error al intentar ejecutar la peticion.</span>";
-                }
-                echo '<script>alert("Contrato Actualizado Correctamente");  window.history.back();</script>';
-                // echo json_encode($statusJson);
-            }
+            $parametrosContrato = $mdlContrato->actualizarContrato($ContratoVO);
+
+            $msj = "Contrato Actualizado Correctamente";
         } else {
-            if (copy($ruta, $destino)) {
-                $parametrosContrato = $mdlContrato->asignarContrato($ContratoVO, $nombreAnexo, $descripcionAnexo, $tamano, $destino, $tipoAnexo);
-                $msj = "<span>Contrato Asignado Correctamente</span>";
-                if ($parametrosContrato > 0) {
-                    $statusJson["success"] = $msj;
-                } else if ($parametrosContrato == -1) {
-                    $statusJson["error"] = "<span>El Empleado ya Cuenta con un contrato</span>";
-                }
-                echo '<script>alert("Contrato Asignado Correctamente");  window.history.back();</script>';
-                //echo json_encode($statusJson);
-            } else {
-                $parametrosContrato = $mdlContrato->asignarContrato($ContratoVO, $nombreAnexo, $descripcionAnexo, $tamano, $destino, $tipoAnexo);
-                $msj = "<span>Contrato Asignado Correctamente</span>";
-                if ($parametrosContrato > 0) {
-                    $statusJson["success"] = $msj;
-                } else if ($parametrosContrato == -1) {
-                    $statusJson["error"] = "<span>El Empleado ya Cuenta con un contrato</span>";
-                }
-                echo '<script>alert("Contrato Asignado Correctamente");  window.history.back();</script>';
-                //echo json_encode($statusJson);
-            }
+            $parametrosContrato = $mdlContrato->asignarContrato($ContratoVO);
+            $msj = "Contrato Asignado Correctamente";
         }
+        if ($parametrosContrato > 0) {
+            $statusJson["success"] = $msj;
+        } else if ($parametrosContrato == -1) {
+            $statusJson["error"] = "El Empleado ya Cuenta con un contrato";
+        }
+        echo json_encode($statusJson);
     } catch (Exception $exc) {
         echo $exc->getTraceAsString();
     }
