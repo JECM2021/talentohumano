@@ -227,13 +227,13 @@
         </sql>
     </CONSULTAR_CUENTA_CONTABLE>
     <ELIMINAR_PENSION_DETALLE>
-        <sql>
-            DELETE FROM FONDOS WHERE FOND_ID = ?;
+        <sql> 
+             DELETE FROM FONDOS_DETALLE WHERE FOND_ID = ?;
         </sql>
     </ELIMINAR_PENSION_DETALLE>
     <ELIMINAR_PENSION>
         <sql>
-            DELETE FROM FONDOS_DETALLE WHERE FOND_ID = ?;
+           DELETE FROM FONDOS WHERE FOND_ID = ?;
         </sql>
     </ELIMINAR_PENSION>
     <ELIMINAR_EPS_DETALLE>

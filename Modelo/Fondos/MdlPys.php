@@ -239,7 +239,7 @@ class mdlFondos extends Conexion
     function eliminarDatosFondoPension(FondosVO $fondosVO)
     {
         try {
-            $conexion = $this->conectarBd(self::CONTABLE);
+            $conexion = $this->conectarBd(self::ASISTENCIAL);
             $respuesta = $conexion->prepare($this->getSql("ELIMINAR_PENSION_DETALLE", self::RUTA_SQL));
             $idFondo = $fondosVO->getIdFondo();
             $respuesta->bind_param('s', $idFondo);
