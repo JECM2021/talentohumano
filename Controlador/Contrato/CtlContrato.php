@@ -70,6 +70,9 @@ switch ($op) {
     case 21:
         listarAreaTrabajo();
         break;
+    case 22:
+        listarParentesco();
+        break;
 }
 
 function visualizarEmpleados()
@@ -363,6 +366,13 @@ function asignarContrato()
     $numeroCuentaBanco = addslashes(htmlspecialchars($_POST["numeroCuentaBanco"]));
     $editar = addslashes(htmlspecialchars($_POST["editar"]));
     $areaTrabajo = addslashes(htmlspecialchars($_POST["areaTrabajo"]));
+    $primNombre = addslashes(htmlspecialchars($_POST["primNombre"]));
+    $segNombre = addslashes(htmlspecialchars($_POST["segNombre"]));
+    $primApellido = addslashes(htmlspecialchars($_POST["primApellido"]));
+    $segApellido = addslashes(htmlspecialchars($_POST["segApellido"]));
+    $celularAcomp = addslashes(htmlspecialchars($_POST["celularAcomp"]));
+    $fijoAcomp = addslashes(htmlspecialchars($_POST["fijoAcomp"]));
+    $parentesco = addslashes(htmlspecialchars($_POST["parentesco"]));
 
     $ContratoVO = new ContratoVO();
     $ContratoVO->setIdEmpleado($idEmpleado);
@@ -392,6 +402,13 @@ function asignarContrato()
     $ContratoVO->setTipoCuentaBanco($tipoCuetaBanco);
     $ContratoVO->setNumeroCuentaBanco($numeroCuentaBanco);
     $ContratoVO->setAreaTrabajo($areaTrabajo);
+    $ContratoVO->setPrimerNombre($primNombre);
+    $ContratoVO->setSegundoNombre($segNombre);
+    $ContratoVO->setPrimerApellido($primApellido);
+    $ContratoVO->setSegundoApellido($segApellido);
+    $ContratoVO->setCelular($celularAcomp);
+    $ContratoVO->setFijo($fijoAcomp);
+    $ContratoVO->setParentesco($parentesco);
     $statusJson = array();
     try {
         if ($editar == 1) {
@@ -439,6 +456,23 @@ function listarAreaTrabajo()
         //die(var_dump($listarTipoDocumento));
         if ($listarAreaTrabajo !== null) {
             $json = json_encode($listarAreaTrabajo);
+            echo $json;
+        } else {
+            echo "Lita vacia.";
+        }
+    } catch (Exception $exc) {
+        echo $exc->getTraceAsString();
+    }
+}
+
+function listarParentesco()
+{
+    $mdlContrato = new mdlContrato();
+    try {
+        $listarParentesco = $mdlContrato->listarParentesco();
+        //die(var_dump($listarTipoDocumento));
+        if ($listarParentesco !== null) {
+            $json = json_encode($listarParentesco);
             echo $json;
         } else {
             echo "Lita vacia.";

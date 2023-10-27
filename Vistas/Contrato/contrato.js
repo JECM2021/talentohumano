@@ -17,6 +17,7 @@ $(document).ready(function() {
     listarCentroDeCosto('cmbCentroDeCosto');
     listarTipoAnexo('cmbTipoAnexo');
     listarAreaTrabajo('cmbAreaTrabajo');
+    parentesco('cmbParentesco');
 
     $("#cmbArl").change(function(e) {
         var porcArl = $(this).find(":selected").data("item");
@@ -150,6 +151,13 @@ function obtenerDatosEmpleados(index) {
     var porcArl = listadoEmpleados[index].POCENTAJE_ARL;
     var contratoId = listadoEmpleados[index].CONTRATO_ID;
     var areaTrabajo = listadoEmpleados[index].AREA_TRABAJO_ID;
+    var primerNombAcomp = listadoEmpleados[index].PRI_NOMB_CONTAC;
+    var segundoNombAcomp = listadoEmpleados[index].SEG_NOMB_CONTAC;
+    var primerApellAcomp = listadoEmpleados[index].PRI_APELL_CONTAC;
+    var segundoApellAcomp = listadoEmpleados[index].SEG_APELL_CONTAC;
+    var celularAcomp = listadoEmpleados[index].CELULAR_CONTAC;
+    var fijoAcomp = listadoEmpleados[index].FIJO_CONTAC;
+    var parentesco = listadoEmpleados[index].ID_PARENTESCO;
 
     $("#mdlEmpleados").modal("hide");
     $("#txtNombreEmpleado").val(nombreyapellido);
@@ -184,6 +192,13 @@ function obtenerDatosEmpleados(index) {
     $("#txtSalarioActualDiario").val(salarioDia);
     $("#txtIdContrato").val(contratoId);
     $("#cmbAreaTrabajo").val(areaTrabajo).change();
+    $("#txtPnombreAcomp").val(primerNombAcomp);
+    $("#txtSnombreAcomp").val(segundoNombAcomp);
+    $("#txtPapellidoAcomp").val(primerApellAcomp);
+    $("#txtSapellidoAcomp").val(segundoApellAcomp);
+    $("#cmbParentesco").val(parentesco);
+    $("#txtCelularAcomp").val(celularAcomp);
+    $("#txtFijoAcomp").val(fijoAcomp);
     if (contratoId > 0) {
         $("#txtEditar").val(1);
         $("#btnGuardar").text("Actualizar");
@@ -621,6 +636,13 @@ function validarContrato() {
     var numeroCuentaBanco = $("#txtNumCuenta").val();
     var areaTrabajo = $("#cmbAreaTrabajo").val();
     var editar = $("#txtEditar").val();
+    var primNombre = $("#txtPnombreAcomp").val();
+    var segNombre = $("#txtSnombreAcomp").val();
+    var primApellido = $("#txtPapellidoAcomp").val();
+    var segApellido = $("#txtSapellidoAcomp").val();
+    var celularAcomp = $("#txtCelularAcomp").val();
+    var fijoAcomp = $("#txtFijoAcomp").val();
+    var parentesco = $("#cmbParentesco").val();
 
     if (idEmpleado.length === 0) {
         alertify.alert('Mensaje', 'Por favor seleccione un empleado');
@@ -667,13 +689,13 @@ function validarContrato() {
     } else {
         asignarContrato(idEmpleado, numContrato, tipoContrato, cargos, fechaInicioContrato, fechaCulminacionContrato, motivoRetiro, salarioTotal, salarioDia, formaPago, tipoCotizante, arl, porcentajeArl,
             cajaCompensacion, fondoCesantias, centroCosto, ciudad, fondoSalud, porcentajeSalud, fechaInicioSalud, fondoPension, porcentajePension, fechaInicioPension,
-            bancos, tipoCuetaBanco, numeroCuentaBanco, areaTrabajo, editar);
+            bancos, tipoCuetaBanco, numeroCuentaBanco, areaTrabajo, primNombre, segNombre, primApellido, segApellido, celularAcomp, fijoAcomp, parentesco, editar);
     }
 }
 
 function asignarContrato(idEmpleado, numContrato, tipoContrato, cargos, fechaInicioContrato, fechaCulminacionContrato, motivoRetiro, salarioTotal, salarioDia, formaPago, tipoCotizante, arl, porcentajeArl,
     cajaCompensacion, fondoCesantias, centroCosto, ciudad, fondoSalud, porcentajeSalud, fechaInicioSalud, fondoPension, porcentajePension, fechaInicioPension, bancos,
-    tipoCuetaBanco, numeroCuentaBanco, areaTrabajo, editar) {
+    tipoCuetaBanco, numeroCuentaBanco, areaTrabajo, primNombre, segNombre, primApellido, segApellido, celularAcomp, fijoAcomp, parentesco, editar) {
     var ur = CONTROLLERCONTRATO;
     var op = 18;
     $.ajax({
@@ -708,7 +730,14 @@ function asignarContrato(idEmpleado, numContrato, tipoContrato, cargos, fechaIni
             tipoCuetaBanco: tipoCuetaBanco,
             numeroCuentaBanco: numeroCuentaBanco,
             areaTrabajo: areaTrabajo,
-            editar: editar
+            editar: editar,
+            primNombre: primNombre,
+            segNombre: segNombre,
+            primApellido: primApellido,
+            segApellido: segApellido,
+            celularAcomp: celularAcomp,
+            fijoAcomp: fijoAcomp,
+            parentesco: parentesco
         }),
         success: function(data) {
             var ret = eval('(' + data + ')');
@@ -759,6 +788,13 @@ function limpiarCampos() {
     $("#cmbTipoDocumento").val('');
     $("#txtNumDocumento").val('');
     $("#cmbEstadoEmpleado").val('');
+    $("#txtPnombreAcomp").val('');
+    $("#txtSnombreAcomp").val('');
+    $("#txtPapellidoAcomp").val('');
+    $("#txtSapellidoAcomp").val('');
+    $("#txtCelularAcomp").val('');
+    $("#txtFijoAcomp").val('');
+    $("#cmbParentesco").val('');
     $("#btnGuardar").text("Guardar");
 }
 
@@ -795,6 +831,34 @@ function listarTipoAnexo(idCombo) {
 function listarAreaTrabajo(idCombo) {
     var ur = CONTROLLERCONTRATO;
     var op = 21;
+    $.ajax({
+        type: "POST",
+        url: ur,
+        data: ({
+            op: op
+        }),
+        success: function(data) {
+            var ret = eval('(' + data + ')');
+            try {
+                listarCombo = $("#" + idCombo);
+                listarCombo.html('');
+                var option = $("<option value=''>Seleccione</option>");
+                listarCombo.append(option);
+                for (var i = 0; i < ret.length; i++) {
+                    var option = $("<option value = " + ret[i].ID + ">" + ret[i].DESCRIPCION + "</option>");
+                    listarCombo.append(option);
+                }
+            } catch (e) {}
+        },
+        error: function(objeto, error, error2) {
+            alertify.alert(error);
+        }
+    });
+}
+
+function parentesco(idCombo) {
+    var ur = CONTROLLERCONTRATO;
+    var op = 22;
     $.ajax({
         type: "POST",
         url: ur,

@@ -40,6 +40,13 @@
             CTR.BANCOS_ID AS BANCO_ID,
             CTR.TIPO_CUENTA_ID AS TIPO_CUENTA_BANCARIA,
             CTR.CTRA_NUM_CUENTA AS NUM_CUENTA,
+            CTR.PRIMER_NOMBRE_CONTAC AS PRI_NOMB_CONTAC,
+            CTR.SEGUNDO_NOMBRE_CONTAC AS SEG_NOMB_CONTAC,
+            CTR.PRIMER_APELLIDO_CONTAC AS PRI_APELL_CONTAC,
+            CTR.SEGUNDO_APELLIDO_CONTAC AS SEG_APELL_CONTAC,
+            CTR.CELULAR_CONTAC AS CELULAR_CONTAC,
+            CTR.FIJO_CONTACT AS FIJO_CONTAC,
+            CTR.PARENT_ID AS ID_PARENTESCO,
             CTR.CTRA_ID AS CONTRATO_ID 
             FROM
             EMPLEADOS EMPL
@@ -200,10 +207,17 @@
             FECHA_INICIO_PENSION,
             BANCOS_ID,
             TIPO_CUENTA_ID,
-            CTRA_NUM_CUENTA
+            CTRA_NUM_CUENTA,
+            PRIMER_NOMBRE_CONTAC,
+            SEGUNDO_NOMBRE_CONTAC,
+            PRIMER_APELLIDO_CONTAC,
+            SEGUNDO_APELLIDO_CONTAC,
+            CELULAR_CONTAC,
+            FIJO_CONTACT,
+            PARENT_ID
             )
             VALUES
-            (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+            (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
         </sql>
     </ASIGNAR_CONTRATO>
     <ACTUALIZAR_CONTRATO>
@@ -234,7 +248,14 @@
             FECHA_INICIO_PENSION = ?,
             BANCOS_ID = ?,
             TIPO_CUENTA_ID = ?,
-            CTRA_NUM_CUENTA = ?
+            CTRA_NUM_CUENTA = ?,
+            PRIMER_NOMBRE_CONTAC = ?,
+            SEGUNDO_NOMBRE_CONTAC = ?,
+            PRIMER_APELLIDO_CONTAC = ?,
+            SEGUNDO_APELLIDO_CONTAC = ?,
+            CELULAR_CONTAC = ?,
+            FIJO_CONTACT = ?,
+            PARENT_ID = ?
             WHERE 
             EMPL_ID = ?
         </sql>
@@ -258,4 +279,14 @@
             AREA_TRABAJO
         </sql>
     </LISTAR_AREA_TRABAJO>
+    <LISTAR_PARENTESCO>
+        <sql>
+            SELECT
+            PARENT_ID AS ID,
+            PARENT_DESCRIPCION AS DESCRIPCION	
+            FROM
+            PARENTESCO
+            WHERE PARENT_ESTADO='A'
+        </sql>
+    </LISTAR_PARENTESCO>
 </root>

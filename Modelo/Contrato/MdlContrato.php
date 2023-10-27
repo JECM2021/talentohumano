@@ -48,7 +48,14 @@ class mdlContrato extends Conexion
                     "TIPO_CUENTA_BANCARIA" => $row['TIPO_CUENTA_BANCARIA'],
                     "NUM_CUENTA" => $row['NUM_CUENTA'],
                     "CONTRATO_ID" => $row['CONTRATO_ID'],
-                    "AREA_TRABAJO_ID" => $row['AREA_TRABAJO_ID']
+                    "AREA_TRABAJO_ID" => $row['AREA_TRABAJO_ID'],
+                    "PRI_NOMB_CONTAC" => $row['PRI_NOMB_CONTAC'],
+                    "SEG_NOMB_CONTAC" => $row['SEG_NOMB_CONTAC'],
+                    "PRI_APELL_CONTAC" => $row['PRI_APELL_CONTAC'],
+                    "SEG_APELL_CONTAC" => $row['SEG_APELL_CONTAC'],
+                    "CELULAR_CONTAC" => $row['CELULAR_CONTAC'],
+                    "FIJO_CONTAC" => $row['FIJO_CONTAC'],
+                    "ID_PARENTESCO" => $row['ID_PARENTESCO']
                 );
             }
         } catch (Exception $exc) {
@@ -473,6 +480,13 @@ class mdlContrato extends Conexion
             $tipoCuetaBanco = $contratoVO->getTipoCuentaBanco();
             $numeroCuentaBanco = $contratoVO->getNumeroCuentaBanco();
             $areaTrabajo = $contratoVO->getAreaTrabajo();
+            $primNombre = $contratoVO->getPrimerNombre();
+            $segNombre = $contratoVO->getSegundoNombre();
+            $primApellido = $contratoVO->getPrimerApellido();
+            $segApellido = $contratoVO->getSegundoApellido();
+            $celularAcomp = $contratoVO->getCelular();
+            $fijoAcomp = $contratoVO->getFijo();
+            $parentesco = $contratoVO->getParentesco();
             if (empty($motivoRetiro)) {
                 $motivoRetiro = null;
             }
@@ -483,7 +497,7 @@ class mdlContrato extends Conexion
             $row = $resultado->fetch_assoc();
             if (count($row) === 0) {
                 $respuesta = $conexion->prepare($this->getSql("ASIGNAR_CONTRATO", self::RUTA_SQL));
-                $respuesta->bind_param('sssssssssssssssssssssssssss', $idEmpleado, $numContrato, $tipoContrato, $cargos, $fechaInicioContrato, $fechaCulminacionContrato, $motivoRetiro, $salarioTotal, $salarioDia, $formaPago, $tipoCotizante, $arl, $porcentajeArl, $cajaCompensacion, $fondoCesantias, $centroCosto, $areaTrabajo, $ciudad, $fondoSalud, $porcentajeSalud, $fechaInicioSalud, $fondoPension, $porcentajePension, $fechaInicioPension, $bancos, $tipoCuetaBanco, $numeroCuentaBanco);
+                $respuesta->bind_param('ssssssssssssssssssssssssssssssssss', $idEmpleado, $numContrato, $tipoContrato, $cargos, $fechaInicioContrato, $fechaCulminacionContrato, $motivoRetiro, $salarioTotal, $salarioDia, $formaPago, $tipoCotizante, $arl, $porcentajeArl, $cajaCompensacion, $fondoCesantias, $centroCosto, $areaTrabajo, $ciudad, $fondoSalud, $porcentajeSalud, $fechaInicioSalud, $fondoPension, $porcentajePension, $fechaInicioPension, $bancos, $tipoCuetaBanco, $numeroCuentaBanco, $primNombre, $segNombre, $primApellido, $segApellido, $celularAcomp, $fijoAcomp, $parentesco);
                 $filasAfectadas = $respuesta->execute() or ($respuesta->error);
                 if ($filasAfectadas > 0) {
                     $filasAfectadas = mysqli_insert_id($conexion);
@@ -536,8 +550,15 @@ class mdlContrato extends Conexion
             $bancos = $contratoVO->getBancos();
             $tipoCuetaBanco = $contratoVO->getTipoCuentaBanco();
             $numeroCuentaBanco = $contratoVO->getNumeroCuentaBanco();
+            $primNombre = $contratoVO->getPrimerNombre();
+            $segNombre = $contratoVO->getSegundoNombre();
+            $primApellido = $contratoVO->getPrimerApellido();
+            $segApellido = $contratoVO->getSegundoApellido();
+            $celularAcomp = $contratoVO->getCelular();
+            $fijoAcomp = $contratoVO->getFijo();
+            $parentesco = $contratoVO->getParentesco();
             $respuesta = $conexion->prepare($this->getSql("ACTUALIZAR_CONTRATO", self::RUTA_SQL));
-            $respuesta->bind_param('sssssssssssssssssssssssssss', $numContrato, $tipoContrato, $cargos, $fechaInicioContrato, $fechaCulminacionContrato, $motivoRetiro, $salarioTotal, $salarioDia, $formaPago, $tipoCotizante, $arl, $porcentajeArl, $cajaCompensacion, $fondoCesantias, $centroCosto, $areaTrabajo, $ciudad, $fondoSalud, $porcentajeSalud, $fechaInicioSalud, $fondoPension, $porcentajePension, $fechaInicioPension, $bancos, $tipoCuetaBanco, $numeroCuentaBanco, $idEmpleado);
+            $respuesta->bind_param('ssssssssssssssssssssssssssssssssss', $numContrato, $tipoContrato, $cargos, $fechaInicioContrato, $fechaCulminacionContrato, $motivoRetiro, $salarioTotal, $salarioDia, $formaPago, $tipoCotizante, $arl, $porcentajeArl, $cajaCompensacion, $fondoCesantias, $centroCosto, $areaTrabajo, $ciudad, $fondoSalud, $porcentajeSalud, $fechaInicioSalud, $fondoPension, $porcentajePension, $fechaInicioPension, $bancos, $tipoCuetaBanco, $numeroCuentaBanco, $primNombre, $segNombre, $primApellido, $segApellido, $celularAcomp, $fijoAcomp, $parentesco, $idEmpleado);
             $filasAfectadas = $respuesta->execute() or dir($respuesta->error);
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
@@ -581,6 +602,31 @@ class mdlContrato extends Conexion
         try {
             $conexion = $this->conectarBd(self::ASISTENCIAL);
             $respuesta = $conexion->prepare($this->getSql("LISTAR_AREA_TRABAJO", self::RUTA_SQL));
+            $respuesta->execute();
+            $result = $respuesta->get_result();
+            while ($row = $result->fetch_assoc()) {
+                $rawdata[] = array(
+                    "ID" => $row['ID'],
+                    "DESCRIPCION" => $row['DESCRIPCION']
+                );
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+        try {
+            $this->descconectarBd($conexion);
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+        return $rawdata;
+    }
+
+    function listarParentesco()
+    {
+        $rawdata = array();
+        try {
+            $conexion = $this->conectarBd(self::ASISTENCIAL);
+            $respuesta = $conexion->prepare($this->getSql("LISTAR_PARENTESCO", self::RUTA_SQL));
             $respuesta->execute();
             $result = $respuesta->get_result();
             while ($row = $result->fetch_assoc()) {

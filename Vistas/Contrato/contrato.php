@@ -255,6 +255,53 @@ include_once '../../Operaciones.php';
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingFour">
+                                        <h4 class="panel-title">
+                                            <i class=""></i> Contactos de Emergencia
+                                        </h4>
+                                    </div>
+                                    <div id="collapseFour" class="" role="tabpanel" aria-labelledby="headingFour">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label>Primer Nombre:</label>
+                                                    <input type="text" name="txtPnombreAcomp" id="txtPnombreAcomp" class="form-control input-sm" value="">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label>Segundo Nombre:</label>
+                                                    <input type="text" name="txtSnombreAcomp" id="txtSnombreAcomp" class="form-control input-sm" value="">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label>Primer Apellido:</label>
+                                                    <input type="text" name="txtPapellidoAcomp" id="txtPapellidoAcomp" class="form-control input-sm" value="">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label>Segundo Apellido:</label>
+                                                    <input type="text" name="txtSapellidoAcomp" id="txtSapellidoAcomp" class="form-control input-sm" value="">
+                                                </div>
+                                            </div><br>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label>Parentesco:</label>
+                                                    <select id="cmbParentesco" name="cmbParentesco" class="form-control input-sm "></select>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>Numero Celular:</label>
+                                                    <input type="text" name="txtCelularAcomp" id="txtCelularAcomp" class="form-control input-sm" value="">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>Numero Fijo:</label>
+                                                    <input type="text" name="txtFijoAcomp" id="txtFijoAcomp" class="form-control input-sm" value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="content">
                             <div class="row" style="margin-top: 20px;">
                                 <div class="col-md-12">
