@@ -99,14 +99,12 @@ class MdlAnexos extends Conexion
         }
         return $rawdata;
     }
-    function actualizarDatosAnexos($idAnexo, $fecha, $tipoAnexo, $detalle)
+    function actualizarDatosAnexos($idAnexo, $fecha, $fechacadEdi, $tipoAnexo, $detalle)
     {
         try {
             $con = $this->conectarBd(self::ASISTENCIAL);
             $ps = $con->prepare($this->getSql("UPDATE_ANEXOS", self::RUTA_SQL));
-            //$evento = 250 ;
-            //die(var_dump($idAnexo, $fecha, $tipoAnexo, $detalle));
-            $ps->bind_param('ssss', $fecha, $detalle, $tipoAnexo, $idAnexo);
+            $ps->bind_param('sssss', $fecha, $detalle, $tipoAnexo, $fechacadEdi, $idAnexo);
             $filasAfectadas = $ps->execute() or die($ps->error);
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();

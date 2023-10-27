@@ -80,18 +80,23 @@
                                       <input name="idPac" id="idPac" type="hidden" />
                                   </div>
                               </div>
-
-                          </div>
-                          <br>
+                          </div><br>
                           <div class="row">
                               <div class="col-md-12">
-                                  <label>Fecha del Documento</label>
+                                  <label>Fecha creacion documento</label>
                                   <div class="">
-                                      <input type="date" class="form-control input-sm" name="txtFechaDocumentoEditar" id="txtFechaDocumentoEditar" value="<?php echo date("Y-m-d"); ?>">
+                                      <input type="date" class="form-control input-sm" name="txtFechaDocumentoEditar" id="txtFechaDocumentoEditar">
                                   </div>
                               </div>
-                          </div>
-                          <br>
+                          </div><br>
+                          <div class="row">
+                              <div class="col-md-12">
+                                  <label>Fecha vencimiento documento</label>
+                                  <div class="">
+                                      <input type="date" class="form-control input-sm" name="txtFechaVenciEditar" id="txtFechaVenciEditar">
+                                  </div>
+                              </div>
+                          </div><br>
                           <div class="row">
                               <div class="col-md-12">
                                   <label>Tipo de Anexo</label>
@@ -115,7 +120,7 @@
                                       <input type="text" name="txtNombreEditarAnexo" id="txtNombreEditarAnexo" class="input-sm form-control" disabled="">
                                   </div>
                               </div>
-                          </div>
+                          </div><br>
                           <div class="row">
                               <div class="col-md-12">
                                   <label>Detalle del Documento</label>

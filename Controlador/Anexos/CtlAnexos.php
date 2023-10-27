@@ -67,9 +67,10 @@ function actualizarDatosAnexos()
     $fechaEditada = addslashes(htmlspecialchars($_POST["fechaEditada"]));
     $tipoAnexoEditado = addslashes(htmlspecialchars($_POST["tipoAnexoEditado"]));
     $DetalleEditado = addslashes(htmlspecialchars($_POST["DetalleEditado"]));
+    $fechacadEdi = addslashes(htmlspecialchars($_POST["fechacadEdi"]));
     $mdlAnexos = new MdlAnexos();
     $statusJson = array();
-    $parametros = $mdlAnexos->actualizarDatosAnexos($idAnexo, $fechaEditada, $tipoAnexoEditado, $DetalleEditado);
+    $parametros = $mdlAnexos->actualizarDatosAnexos($idAnexo, $fechaEditada, $fechacadEdi, $tipoAnexoEditado, $DetalleEditado);
     if ($parametros > 0) {
         $statusJson["success"] = "<label>Los datos del anexo han sido actualizado.</label>";
         $statusJson["data"] = $parametros;

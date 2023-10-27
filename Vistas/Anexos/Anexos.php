@@ -73,7 +73,8 @@ include_once '../../Operaciones.php';
                                                         <th style='width:2%;' class='center'>#</th>
                                                         <th style='width:12%;'>FECHA REGISTRO</th>
                                                         <th style='width:36%;' class='center'>NOMBRE O DESCRIPCION</th>
-                                                        <th style='width:36%;' class='center'>TIPO ANEXOS</th>
+                                                        <th style='width:26%;' class='center'>TIPO ANEXOS</th>
+                                                        <th style='width:15%;' class='center'>FECHA CADUCIDAD</th>
                                                         <th style='width:5%;'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></th>
                                                         <th style='width:5%;'><i class='fa fa-pencil-square' aria-hidden='true'></i></th>
                                                         <th style='width:5%;'><i class='fa fa-trash' aria-hidden='true'></i></th>

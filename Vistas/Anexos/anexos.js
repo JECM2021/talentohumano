@@ -114,9 +114,18 @@ function detalleAnexos(contrato) {
                 var listadoDetalleAnexo = $("#tbodyPacientesAnexo");
                 $("#tbodyPacientesAnexo").append(listadoDetalleAnexo);
                 for (var i = 0; i < ret.length; i++) {
-                    var tr = $("<tr class='tblFiltradoPaciente' id='detAnexo" + ret[i].ID + "' style='cursor:pointer' onclick =\"colorCeltaTabla(this,1,'" + i + "');\" ></tr>")
-                    listadoDetalleAnexo.append(tr);
+                    var style = "";
+                    var mensaje = "";
+                    if (ret[i].DIAS_PARA_CADUCAR <= 30 && ret[i].DIAS_PARA_CADUCAR >= 1) {
+                        style = "warning";
+                        mensaje = "El documento esta proximo a caducar";
+                    } else if (ret[i].DIAS_PARA_CADUCAR <= 0) {
+                        style = "danger";
+                        mensaje = 'El documento ha caducado';
+                    }
 
+                    var tr = $("<tr class='tblFiltradoPaciente " + style + "' id='detAnexo" + ret[i].ID + "' title='" + mensaje + "' style='cursor:pointer' onclick =\"colorCeltaTabla(this,1,'" + i + "');\" ></tr>")
+                    listadoDetalleAnexo.append(tr);
                     var td = $("<td>" + contador + "</td>");
                     tr.append(td);
                     var td = $("<td>" + ret[i].FECHA_REGISTRO + "</td>");
@@ -124,6 +133,8 @@ function detalleAnexos(contrato) {
                     var td = $("<td>" + ret[i].DESCRIPCION + "</td>");
                     tr.append(td);
                     var td = $("<td>" + ret[i].TIPO_ANEXO + "</td>");
+                    tr.append(td);
+                    var td = $("<td>" + ret[i].FECHA_CADUCIDAD + "</td>");
                     tr.append(td);
                     var td = $("<td onclick =\"visualizarpdf('" + i + "');\"  ><i class='fa fa-file-pdf-o' aria-hidden='true'></i></td>")
                     tr.append(td);
@@ -162,6 +173,7 @@ function editarAnexo(index) {
         var urlE = listarDetalleAnexo[index].RUTA;
         var detallleE = listarDetalleAnexo[index].DESCRIPCION;
         var fechaE = listarDetalleAnexo[index].FECHA_REGISTRO;
+        var fechacadE = listarDetalleAnexo[index].FECHA_CADUCIDAD;
         $("#txtDocumentoEditar").val(documentoE);
         $("#txtNombrePacienteEditar").val(nombreE);
         $("#cmbTipoAnexoEditar").val(tipoAnexoE);
@@ -170,6 +182,7 @@ function editarAnexo(index) {
         $("#txtIdAnexo").val(idAnexo);
         $("#txtDetalleEditarDocumento").val(detallleE);
         $("#txtFechaDocumentoEditar").val(fechaE);
+        $("#txtFechaVenciEditar").val(fechacadE);
     }
 }
 
@@ -178,6 +191,7 @@ function actualizarAnexo() {
     var fechaEditada = $("#txtFechaDocumentoEditar").val();
     var tipoAnexoEditado = $("#cmbTipoAnexoEditar").val();
     var DetalleEditado = $("#txtDetalleEditarDocumento").val();
+    var fechacadEdi = $("#txtFechaVenciEditar").val();
     var idAnexo = $("#txtIdAnexo").val();
     if (idAnexo === "") {
         toastr.options = { "positionClass": "toast-bottom-right", };
@@ -191,6 +205,9 @@ function actualizarAnexo() {
     } else if (DetalleEditado.length === 0) {
         toastr.options = { "positionClass": "toast-bottom-right", };
         toastr.warning('El detalle del Anexo no puede quedar vacio.');
+    } else if (fechacadEdi.length === 0) {
+        toastr.options = { "positionClass": "toast-bottom-right", };
+        toastr.warning('La fecha de vencimiento no puede quedar vacia.');
     } else {
         alertify.confirm('¿esta seguro que desea actualizar los Datos del Anexo.?', function() {
             var ur = CONTROLER_ANEXOS;
@@ -203,14 +220,15 @@ function actualizarAnexo() {
                     idAnexo: idAnexo,
                     fechaEditada: fechaEditada,
                     tipoAnexoEditado: tipoAnexoEditado,
-                    DetalleEditado: DetalleEditado
+                    DetalleEditado: DetalleEditado,
+                    fechacadEdi: fechacadEdi
                 }),
                 success: function(data) {
                     try {
                         var ret = eval('(' + data + ')');
                         if (ret.hasOwnProperty("success")) {
                             $("#modalEditarAnexo").modal("hide");
-                            //detalleDocumentacion();
+                            //visualizarPacienteAnexo()
                             toastr.success(ret.success);
                         } else if (ret.hasOwnProperty("error")) {
                             toastr.error(ret.error);
