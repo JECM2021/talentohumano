@@ -32,6 +32,48 @@ class ContratoVO
     public $numeroCuentaBanco;
     public $idContrato;
     public $areaTrabajo;
+    public $primNombre;
+    public $segNombre;
+    public $primApellido;
+    public $segApellido;
+    public $celularAcomp;
+    public $fijoAcomp;
+    public $parentesco;
+
+    function setParentesco($parentesco)
+    {
+        $this->parentesco = $parentesco;
+    }
+
+    function setFijo($fijoAcomp)
+    {
+        $this->fijoAcomp = $fijoAcomp;
+    }
+
+    function setCelular($celularAcomp)
+    {
+        $this->celularAcomp = $celularAcomp;
+    }
+
+    function setSegundoApellido($segApellido)
+    {
+        $this->segApellido = $segApellido;
+    }
+
+    function setPrimerApellido($primApellido)
+    {
+        $this->primApellido = $primApellido;
+    }
+
+    function setSegundoNombre($segNombre)
+    {
+        $this->segNombre = $segNombre;
+    }
+
+    function setPrimerNombre($primNombre)
+    {
+        $this->primNombre = $primNombre;
+    }
 
     function setAreaTrabajo($areaTrabajo)
     {
@@ -184,6 +226,41 @@ class ContratoVO
     }
 
     /////////////////////////////////////////////////////////////////////////////////
+
+    function getParentesco()
+    {
+        return $this->parentesco;
+    }
+
+    function getFijo()
+    {
+        return $this->fijoAcomp;
+    }
+
+    function getCelular()
+    {
+        return $this->celularAcomp;
+    }
+
+    function getSegundoApellido()
+    {
+        return $this->segApellido;
+    }
+
+    function getPrimerApellido()
+    {
+        return $this->primApellido;
+    }
+
+    function getSegundoNombre()
+    {
+        return $this->segNombre;
+    }
+
+    function getPrimerNombre()
+    {
+        return $this->primNombre;
+    }
 
     function getAreaTrabajo()
     {

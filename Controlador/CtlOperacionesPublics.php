@@ -17,6 +17,9 @@ switch ($op) {
     case 60:
         contratosvencer();
         break;
+    case 61:
+        documentosVencidos();
+        break;
 }
 
 function loguerarUsuario()
@@ -137,12 +140,27 @@ function contratosvencer()
     global $mdlPacientes;
     try {
         $listadocontratovencer = $mdlPacientes->contratosvencer();
-        //die(var_dump($listadocontratovencer));
         if (!empty($listadocontratovencer)) {
             $json = json_encode($listadocontratovencer);
             echo $json;
         } else {
             echo 0;
+        }
+    } catch (Exception $exc) {
+        echo $exc->getTraceAsString();
+    }
+}
+
+function documentosVencidos()
+{
+    global $mdlPacientes;
+    try {
+        $listarDocumento = $mdlPacientes->documentosVencidos();
+        if ($listarDocumento !== null) {
+            $json = json_encode($listarDocumento);
+            echo $json;
+        } else {
+            echo "Lista vacia.";
         }
     } catch (Exception $exc) {
         echo $exc->getTraceAsString();

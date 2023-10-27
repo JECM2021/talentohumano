@@ -387,4 +387,16 @@
             DATEDIFF(DATE( CT.CTRA_FECHA_FINAL ),DATE(CURDATE())) &lt;=  40
         </sql>
     </LISTAR_CONTRATOS_VENCER>
+    <DOCUMENTOS_VENCIDOS>
+        <sql>
+            SELECT
+            ANX_ID AS ID,
+            DATE(ANX_FECHA_CADUCIDAD) AS FECHA_CADUCIDAD,
+            DATEDIFF(DATE(ANX_FECHA_CADUCIDAD),DATE(CURDATE())) AS DIAS,
+            ANX_DESCRIPCION AS DESCRIPCION
+            FROM
+            ANEXOS 
+            WHERE DATEDIFF(ANX_FECHA_CADUCIDAD,CURDATE()) &lt;=30 AND ANX_ESTADO = 'A';
+        </sql>
+    </DOCUMENTOS_VENCIDOS>
 </root>

@@ -425,7 +425,32 @@ class MdlClinica extends Conexion
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
-        //die(var_dump($rawdata));
+        return $rawdata;
+    }
+
+    function documentosVencidos()
+    {
+        $rawdata = array();
+        try {
+            $conexion = $this->conectarBd(self::ASISTENCIAL);
+            $respuesta = $conexion->prepare($this->getSql("DOCUMENTOS_VENCIDOS", self::RUTA_SQL));
+            $respuesta->execute();
+            $result = $respuesta->get_result();
+            while ($row = $result->fetch_assoc()) {
+                $rawdata[] = array(
+                    "DIAS" => $row['DIAS'],
+                    "ID" => $row['ID'],
+                    "DESCRIPCION" => $row['DESCRIPCION']
+                );
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+        try {
+            $this->descconectarBd($conexion);
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
         return $rawdata;
     }
 }
