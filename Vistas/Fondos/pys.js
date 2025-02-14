@@ -225,6 +225,7 @@ function limpiarCampos() {
     $("#cmbFondo").val('');
     $("#cmbTipoFondo").val('');
     $("#txtEditar").val('');
+    $("#txtIdFondoPension").val('');
     $("#txtIdAuxContable").val('');
     $("#txtIdAuxFiscal").val('');
     $("#txtIdAuxNormas").val('');
@@ -240,6 +241,7 @@ function limpiarCampos() {
 
 function limpiarCamposDos() {
     $("#txtCodigoEps").val('');
+    $("#txtCodigoEps").prop('disabled', false);
     $("#txtNombreEps").val('');
     $("#cmbTipoDocumentoEps").val('').change();
     $("#txtNumDocumentoEps").val('');
@@ -253,6 +255,9 @@ function limpiarCamposDos() {
     $("#txtIdAuxContableEps").val('');
     $("#txtIdAuxFiscalEps").val('');
     $("#txtIdAuxNormasEps").val('');
+    $("#txtIdFondoEps").val('');
+    $("#txtEditarEps").val('0');
+    $("#btnGuardarEps").text("Guardar")
 }
 
 function validarCampos() {

@@ -37,7 +37,7 @@ class MdlParafiscales extends Conexion
     {
         $rawdata = array();
         try {
-            $conexion = $this->conectarBd(self::CONTABLE);
+            $conexion = $this->conectarBd(self::ASISTENCIAL);
             $respuesta = $conexion->prepare($this->getSql("LISTAR_TIPO_FONDOS", self::RUTA_SQL));
             $respuesta->execute();
             $result = $respuesta->get_result();
@@ -168,6 +168,10 @@ class MdlParafiscales extends Conexion
             PFD.CODADMIN_SENA AS CODADMIN_SENA, 
             PF.TPF_ID AS TIPO_FONDO,
             CASE
+                WHEN PF.TPF_ID = '1' THEN 'PRIVADO'
+                WHEN PF.TPF_ID = '2' THEN 'PUBLICO'
+            END AS FONDO_NAME,
+            CASE
             WHEN PF.PARAF_ESTADO = 'A' THEN
             'ACTIVO' 
             WHEN PF.PARAF_ESTADO = 'I' THEN
@@ -203,7 +207,8 @@ class MdlParafiscales extends Conexion
                     "NITSENA" => $row['NITSENA'],
                     "CODADMIN_SUBFAM" => $row['CODADMIN_SUBFAM'],
                     "CODADMIN_ICBF" => $row['CODADMIN_ICBF'],
-                    "CODADMIN_SENA" => $row['CODADMIN_SENA']
+                    "CODADMIN_SENA" => $row['CODADMIN_SENA'],
+                    "FONDO_NAME" => $row['FONDO_NAME']
                 );
             }
             $json_data = array(

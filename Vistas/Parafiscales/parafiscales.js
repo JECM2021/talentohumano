@@ -299,7 +299,7 @@ function visualizarParaf() {
             },
             { name: "CODIGO", data: "PARAF_CODIGO", width: "10%" },
             { name: "RAZON SOCIAL", data: "PARAF_NOMBRE", width: "45%" },
-            { name: "TIPO DE FONDO", data: "TIPO_FONDO", width: "15%" },
+            { name: "TIPO DE FONDO", data: "FONDO_NAME", width: "15%" },
             { name: "ESTADO", data: "ESTADO", width: "15%" },
             {
                 name: "ORDEN",

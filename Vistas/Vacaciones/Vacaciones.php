@@ -7,7 +7,7 @@ include_once '../../Operaciones.php';
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SISV | Asignacion de Contrato</title>
+    <title>SISV | Asignacion periodo vacaciones</title>
     <?php
     include '../../webPage/imports/imports.php';
     ?>
@@ -28,12 +28,12 @@ include_once '../../Operaciones.php';
             <div class="content">
                 <section class="content-header">
                     <h1>
-                        <i class=""></i> Asignacion de Contrato
+                        <i class=""></i> Asignacion periodo vacaciones
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="../../principal"><i class="fa fa-dashboard"></i> Principal</a></li>
                         <li class="">Empleados</li>
-                        <li class="">Asignacion de Contrato</li>
+                        <li class="">Asignacion periodo vacaciones</li>
                     </ol>
                 </section><br>
                 <section>

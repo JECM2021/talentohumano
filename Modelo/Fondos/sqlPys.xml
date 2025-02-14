@@ -12,11 +12,13 @@
     </LISTAR_TIPO_FONDOS>
     <LISTAR_FONDOS>
         <sql>
-            SELECT
-            TPF_ID AS ID,
-            TPF_DESCRIPCION AS DESCRIPCION
-            FROM
-            TIPO_DE_FONDO
+           SELECT
+TPF_ID AS ID,
+TPF_DESCRIPCION AS DESCRIPCION 
+FROM
+TIPO_DE_FONDO 
+WHERE
+TPF_ESTADO = 'A'
         </sql>
     </LISTAR_FONDOS>
     <LISTAR_TIPO_DOCUMENTO>

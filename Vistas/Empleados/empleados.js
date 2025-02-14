@@ -27,8 +27,8 @@ $(document).ready(function() {
     });
 
     visualizarEmpleados();
-    var table = $('#tbl_visualizar_cargos').DataTable();
-    $('#tbl_visualizar_cargos tbody').on('click', 'tr', function() {
+    var table = $('#tbl_visualizar_Empleados').DataTable();
+    $('#tbl_visualizar_Empleados tbody').on('click', 'tr', function() {
         if ($(this).parents().hasClass('selected')) {
             $(this).removeClass('selected');
         } else {
@@ -420,8 +420,12 @@ function buscarEmpleados() {
                     $("#txtPrimerApellido").val(ret[0].PRIMERAPELLIDO);
                     $("#txtSegundoApellido").val(ret[0].SEGUNDOAPELLIDO);
                     $("#txtfechaDeNacimiento").val(ret[0].FECHANACIMIENTO);
-                    $("#cmbDepartamento").val(ret[0].DEPARTAMENTO).change();
-                    $("#cmbCiudad").val(ret[0].CIUDAD).change();
+                    setTimeout(function() {
+                        $("#cmbDepartamento").val(ret[0].DEPARTAMENTO).change();
+                    }, 500);
+                    setTimeout(function() {
+                        $("#cmbCiudad").val(ret[0].CIUDAD).change();
+                    }, 600);
                     $("#cmbEstadoCivil").val(ret[0].ESTADOCIVIL).change();
                     $("#cmbSexo").val(ret[0].SEXO).change();
                     $("#cmbGrupoSanguineo").val(ret[0].GRUPOSANGUINEO).change();
@@ -500,7 +504,7 @@ function actulizarDatosEmpleado() {
     } else if (estado.length === 0) {
         alertify.alert("Mensaje", 'Por favor elija un estado');
     } else {
-        alertify.confirm('Mensaje', '¿Esta seguro que desea actualizar la informacion de este paciente. ?', function() {
+        alertify.confirm('Mensaje', '¿Esta seguro que desea actualizar la informacion del empleado. ?', function() {
                 var ur = CONTROLLEREMPLEADO;
                 var op = 11;
                 $.ajax({
@@ -535,6 +539,7 @@ function actulizarDatosEmpleado() {
                             var ret = eval('(' + data + ')');
                             if (ret.hasOwnProperty("success")) {
                                 alertify.success(ret.success);
+                                $('#tbl_visualizar_Empleados').DataTable().ajax.reload();
                                 limpiarCampos();
                             } else if (ret.hasOwnProperty("error")) {
                                 alertify.alert('Mensaje', ret.error);

@@ -34,7 +34,7 @@ class mdlFondos extends Conexion
     {
         $rawdata = array();
         try {
-            $conexion = $this->conectarBd(self::CONTABLE);
+            $conexion = $this->conectarBd(self::ASISTENCIAL);
             $respuesta = $conexion->prepare($this->getSql("LISTAR_FONDOS", self::RUTA_SQL));
             $respuesta->execute();
             $result = $respuesta->get_result();
@@ -59,7 +59,7 @@ class mdlFondos extends Conexion
     {
         $rawdata = array();
         try {
-            $conexion = $this->conectarBd(self::CONTABLE);
+            $conexion = $this->conectarBd(self::ASISTENCIAL);
             $respuesta = $conexion->prepare($this->getSql("LISTAR_FONDOS", self::RUTA_SQL));
             $respuesta->execute();
             $result = $respuesta->get_result();
